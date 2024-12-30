@@ -27,9 +27,10 @@ namespace PromptEngineering.Services
         private readonly MySettings _settings;
 
 
-        public ChatServices(ILogger<ChatServices> logger, IChatRepository chatRepository, IHttpClientFactory httpClientFactory, IOptions<MySettings> settings)
+        public ChatServices(ILogger<ChatServices> logger, IMapper mapper, IChatRepository chatRepository, IHttpClientFactory httpClientFactory, IOptions<MySettings> settings)
         {
             _logger = logger;
+            _mapper = mapper;
             _chatRepository = chatRepository;            
             _httpClient = httpClientFactory.CreateClient();
         }

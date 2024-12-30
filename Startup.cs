@@ -31,7 +31,10 @@ namespace PromptEngineering
                 .WithExposedHeaders("*")
                 .AllowAnyHeader();
             }));
-            
+
+            // Add AutoMapper services            
+            services.AddAutoMapper(cfg => cfg.AddMaps(GetType().Assembly, typeof(MappingProfile).Assembly));
+
             // Register the services
             services.AddScoped<IChatRepository, ChatRepository>();
             services.AddScoped<IChatServices, ChatServices>();
