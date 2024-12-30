@@ -1,0 +1,33 @@
+{
+  "version": 2,
+  "dgSpecHash": "QDMnAMWMnm2PmY5YLje/kgh6VdPyzA5+fw4qPJoHQQ0NilpI7Yt8y2HmrJipeU6u/tz7bPQtO4ZrZSlKpm+X6w==",
+  "success": true,
+  "projectFilePath": "C:\\Gabriel\\SourceCode\\Prompt Buddy Playground\\PromptEngineering\\PromptEngineering.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\gabri\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
+    "C:\\Users\\gabri\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\gabri\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\gabri\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\gabri\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
+    "C:\\Users\\gabri\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\gabri\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\gabri\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.5\\microsoft.visualstudio.azure.containers.tools.targets.1.19.5.nupkg.sha512",
+    "C:\\Users\\gabri\\.nuget\\packages\\npgsql\\8.0.4\\npgsql.8.0.4.nupkg.sha512",
+    "C:\\Users\\gabri\\.nuget\\packages\\openai\\2.1.0\\openai.2.1.0.nupkg.sha512",
+    "C:\\Users\\gabri\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "C:\\Users\\gabri\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "C:\\Users\\gabri\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "C:\\Users\\gabri\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512",
+    "C:\\Users\\gabri\\.nuget\\packages\\system.clientmodel\\1.2.1\\system.clientmodel.1.2.1.nupkg.sha512",
+    "C:\\Users\\gabri\\.nuget\\packages\\system.diagnostics.diagnosticsource\\8.0.0\\system.diagnostics.diagnosticsource.8.0.0.nupkg.sha512",
+    "C:\\Users\\gabri\\.nuget\\packages\\system.memory.data\\6.0.0\\system.memory.data.6.0.0.nupkg.sha512",
+    "C:\\Users\\gabri\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\gabri\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
+    "C:\\Users\\gabri\\.nuget\\packages\\system.text.json\\8.0.4\\system.text.json.8.0.4.nupkg.sha512",
+    "C:\\Users\\gabri\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.36\\microsoft.windowsdesktop.app.ref.6.0.36.nupkg.sha512",
+    "C:\\Users\\gabri\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.36\\microsoft.netcore.app.ref.6.0.36.nupkg.sha512",
+    "C:\\Users\\gabri\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.36\\microsoft.aspnetcore.app.ref.6.0.36.nupkg.sha512",
+    "C:\\Users\\gabri\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.36\\microsoft.netcore.app.host.win-x64.6.0.36.nupkg.sha512"
+  ],
+  "logs": []
+}

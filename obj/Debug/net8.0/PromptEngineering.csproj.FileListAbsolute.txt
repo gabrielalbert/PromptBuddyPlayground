@@ -1,0 +1,269 @@
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\bin\Debug\net8.0\appsettings.Development.json
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\bin\Debug\net8.0\appsettings.json
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\bin\Debug\net8.0\PromptEngineering.exe
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\bin\Debug\net8.0\PromptEngineering.deps.json
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\bin\Debug\net8.0\PromptEngineering.runtimeconfig.json
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\bin\Debug\net8.0\PromptEngineering.dll
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\bin\Debug\net8.0\PromptEngineering.pdb
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\bin\Debug\net8.0\Npgsql.dll
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\obj\Debug\net8.0\PromptEngineering.csproj.AssemblyReference.cache
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\obj\Debug\net8.0\PromptEngineering.GeneratedMSBuildEditorConfig.editorconfig
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\obj\Debug\net8.0\PromptEngineering.AssemblyInfoInputs.cache
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\obj\Debug\net8.0\PromptEngineering.AssemblyInfo.cs
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\obj\Debug\net8.0\PromptEngineering.csproj.CoreCompileInputs.cache
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\obj\Debug\net8.0\PromptEngineering.MvcApplicationPartsAssemblyInfo.cs
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\obj\Debug\net8.0\PromptEngineering.MvcApplicationPartsAssemblyInfo.cache
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\obj\Debug\net8.0\staticwebassets.build.json
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\obj\Debug\net8.0\staticwebassets.development.json
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.PromptEngineering.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.build.PromptEngineering.props
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.PromptEngineering.props
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.PromptEngineering.props
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\obj\Debug\net8.0\scopedcss\bundle\PromptEngineering.styles.css
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\obj\Debug\net8.0\PromptEngineering.csproj.CopyComplete
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\obj\Debug\net8.0\PromptEngineering.dll
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\obj\Debug\net8.0\refint\PromptEngineering.dll
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\obj\Debug\net8.0\PromptEngineering.pdb
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\obj\Debug\net8.0\PromptEngineering.genruntimeconfig.cache
+C:\Gabriel\SourceCode\PromptBuddy_V1\PromptBuddy V1\PromptEngineering\obj\Debug\net8.0\ref\PromptEngineering.dll
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\bin\Debug\net8.0\appsettings.Development.json
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\bin\Debug\net8.0\appsettings.json
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\bin\Debug\net8.0\PromptEngineering.exe
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\bin\Debug\net8.0\PromptEngineering.deps.json
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\bin\Debug\net8.0\PromptEngineering.runtimeconfig.json
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\bin\Debug\net8.0\PromptEngineering.dll
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\bin\Debug\net8.0\PromptEngineering.pdb
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\bin\Debug\net8.0\Npgsql.dll
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\obj\Debug\net8.0\PromptEngineering.csproj.AssemblyReference.cache
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\obj\Debug\net8.0\PromptEngineering.GeneratedMSBuildEditorConfig.editorconfig
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\obj\Debug\net8.0\PromptEngineering.AssemblyInfoInputs.cache
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\obj\Debug\net8.0\PromptEngineering.AssemblyInfo.cs
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\obj\Debug\net8.0\PromptEngineering.csproj.CoreCompileInputs.cache
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\obj\Debug\net8.0\PromptEngineering.MvcApplicationPartsAssemblyInfo.cs
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\obj\Debug\net8.0\PromptEngineering.MvcApplicationPartsAssemblyInfo.cache
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\obj\Debug\net8.0\staticwebassets.build.json
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\obj\Debug\net8.0\staticwebassets.development.json
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.PromptEngineering.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.build.PromptEngineering.props
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.PromptEngineering.props
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.PromptEngineering.props
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\obj\Debug\net8.0\scopedcss\bundle\PromptEngineering.styles.css
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\obj\Debug\net8.0\PromptEn.9222F31A.Up2Date
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\obj\Debug\net8.0\PromptEngineering.dll
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\obj\Debug\net8.0\refint\PromptEngineering.dll
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\obj\Debug\net8.0\PromptEngineering.pdb
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\obj\Debug\net8.0\PromptEngineering.genruntimeconfig.cache
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptBuddy_V2\PromptBuddy_V2\PromptEngineering\obj\Debug\net8.0\ref\PromptEngineering.dll
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\bin\Debug\net8.0\appsettings.Development.json
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\bin\Debug\net8.0\appsettings.json
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\bin\Debug\net8.0\PromptEngineering.exe
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\bin\Debug\net8.0\PromptEngineering.deps.json
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\bin\Debug\net8.0\PromptEngineering.runtimeconfig.json
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\bin\Debug\net8.0\PromptEngineering.dll
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\bin\Debug\net8.0\PromptEngineering.pdb
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\bin\Debug\net8.0\Npgsql.dll
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\obj\Debug\net8.0\PromptEngineering.csproj.AssemblyReference.cache
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\obj\Debug\net8.0\PromptEngineering.GeneratedMSBuildEditorConfig.editorconfig
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\obj\Debug\net8.0\PromptEngineering.AssemblyInfoInputs.cache
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\obj\Debug\net8.0\PromptEngineering.AssemblyInfo.cs
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\obj\Debug\net8.0\PromptEngineering.csproj.CoreCompileInputs.cache
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\obj\Debug\net8.0\PromptEngineering.MvcApplicationPartsAssemblyInfo.cs
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\obj\Debug\net8.0\PromptEngineering.MvcApplicationPartsAssemblyInfo.cache
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\obj\Debug\net8.0\staticwebassets.build.json
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\obj\Debug\net8.0\staticwebassets.development.json
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.PromptEngineering.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.build.PromptEngineering.props
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.PromptEngineering.props
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.PromptEngineering.props
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\obj\Debug\net8.0\scopedcss\bundle\PromptEngineering.styles.css
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\obj\Debug\net8.0\PromptEngineering.csproj.CopyComplete
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\obj\Debug\net8.0\PromptEngineering.dll
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\obj\Debug\net8.0\refint\PromptEngineering.dll
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\obj\Debug\net8.0\PromptEngineering.pdb
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\obj\Debug\net8.0\PromptEngineering.genruntimeconfig.cache
+C:\Gabriel\SourceCode\PromptEngg_V3\PromptEngg_V3\PromptEngineering\obj\Debug\net8.0\ref\PromptEngineering.dll
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\bin\Debug\net8.0\appsettings.Development.json
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\bin\Debug\net8.0\appsettings.json
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\bin\Debug\net8.0\PromptEngineering.exe
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\bin\Debug\net8.0\PromptEngineering.deps.json
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\bin\Debug\net8.0\PromptEngineering.runtimeconfig.json
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\bin\Debug\net8.0\PromptEngineering.dll
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\bin\Debug\net8.0\PromptEngineering.pdb
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\bin\Debug\net8.0\Npgsql.dll
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\obj\Debug\net8.0\PromptEngineering.csproj.AssemblyReference.cache
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\obj\Debug\net8.0\PromptEngineering.GeneratedMSBuildEditorConfig.editorconfig
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\obj\Debug\net8.0\PromptEngineering.AssemblyInfoInputs.cache
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\obj\Debug\net8.0\PromptEngineering.AssemblyInfo.cs
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\obj\Debug\net8.0\PromptEngineering.csproj.CoreCompileInputs.cache
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\obj\Debug\net8.0\PromptEngineering.MvcApplicationPartsAssemblyInfo.cs
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\obj\Debug\net8.0\PromptEngineering.MvcApplicationPartsAssemblyInfo.cache
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\obj\Debug\net8.0\staticwebassets.build.json
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\obj\Debug\net8.0\staticwebassets.development.json
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.PromptEngineering.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.build.PromptEngineering.props
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.PromptEngineering.props
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.PromptEngineering.props
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\obj\Debug\net8.0\scopedcss\bundle\PromptEngineering.styles.css
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\obj\Debug\net8.0\PromptEn.9222F31A.Up2Date
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\obj\Debug\net8.0\PromptEngineering.dll
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\obj\Debug\net8.0\refint\PromptEngineering.dll
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\obj\Debug\net8.0\PromptEngineering.pdb
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\obj\Debug\net8.0\PromptEngineering.genruntimeconfig.cache
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\PromptEngg_V4\PromptEngg_V4\PromptEngineering\obj\Debug\net8.0\ref\PromptEngineering.dll
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\bin\Debug\net8.0\appsettings.Development.json
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\bin\Debug\net8.0\appsettings.json
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\bin\Debug\net8.0\PromptEngineering.exe
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\bin\Debug\net8.0\PromptEngineering.deps.json
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\bin\Debug\net8.0\PromptEngineering.runtimeconfig.json
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\bin\Debug\net8.0\PromptEngineering.dll
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\bin\Debug\net8.0\PromptEngineering.pdb
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\bin\Debug\net8.0\Npgsql.dll
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\obj\Debug\net8.0\PromptEngineering.csproj.AssemblyReference.cache
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\obj\Debug\net8.0\PromptEngineering.GeneratedMSBuildEditorConfig.editorconfig
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\obj\Debug\net8.0\PromptEngineering.AssemblyInfoInputs.cache
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\obj\Debug\net8.0\PromptEngineering.AssemblyInfo.cs
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\obj\Debug\net8.0\PromptEngineering.csproj.CoreCompileInputs.cache
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\obj\Debug\net8.0\PromptEngineering.MvcApplicationPartsAssemblyInfo.cs
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\obj\Debug\net8.0\PromptEngineering.MvcApplicationPartsAssemblyInfo.cache
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\obj\Debug\net8.0\staticwebassets.build.json
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\obj\Debug\net8.0\staticwebassets.development.json
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.PromptEngineering.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.build.PromptEngineering.props
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.PromptEngineering.props
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.PromptEngineering.props
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\obj\Debug\net8.0\scopedcss\bundle\PromptEngineering.styles.css
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\obj\Debug\net8.0\PromptEngineering.csproj.CopyComplete
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\obj\Debug\net8.0\PromptEngineering.dll
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\obj\Debug\net8.0\refint\PromptEngineering.dll
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\obj\Debug\net8.0\PromptEngineering.pdb
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\obj\Debug\net8.0\PromptEngineering.genruntimeconfig.cache
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V5\PromptEngineering\obj\Debug\net8.0\ref\PromptEngineering.dll
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\bin\Debug\net8.0\appsettings.Development.json
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\bin\Debug\net8.0\appsettings.json
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\bin\Debug\net8.0\PromptEngineering.exe
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\bin\Debug\net8.0\PromptEngineering.deps.json
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\bin\Debug\net8.0\PromptEngineering.runtimeconfig.json
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\bin\Debug\net8.0\PromptEngineering.dll
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\bin\Debug\net8.0\PromptEngineering.pdb
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\bin\Debug\net8.0\Npgsql.dll
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\obj\Debug\net8.0\PromptEngineering.csproj.AssemblyReference.cache
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\obj\Debug\net8.0\PromptEngineering.GeneratedMSBuildEditorConfig.editorconfig
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\obj\Debug\net8.0\PromptEngineering.AssemblyInfoInputs.cache
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\obj\Debug\net8.0\PromptEngineering.AssemblyInfo.cs
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\obj\Debug\net8.0\PromptEngineering.csproj.CoreCompileInputs.cache
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\obj\Debug\net8.0\PromptEngineering.MvcApplicationPartsAssemblyInfo.cs
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\obj\Debug\net8.0\PromptEngineering.MvcApplicationPartsAssemblyInfo.cache
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\obj\Debug\net8.0\staticwebassets.build.json
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\obj\Debug\net8.0\staticwebassets.development.json
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.PromptEngineering.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.build.PromptEngineering.props
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.PromptEngineering.props
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.PromptEngineering.props
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\obj\Debug\net8.0\scopedcss\bundle\PromptEngineering.styles.css
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\obj\Debug\net8.0\PromptEngineering.csproj.CopyComplete
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\obj\Debug\net8.0\PromptEngineering.dll
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\obj\Debug\net8.0\refint\PromptEngineering.dll
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\obj\Debug\net8.0\PromptEngineering.pdb
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\obj\Debug\net8.0\PromptEngineering.genruntimeconfig.cache
+C:\Gabriel\SourceCode\PromptEngg_V5\PromptEngg_V6\PromptEngineering\obj\Debug\net8.0\ref\PromptEngineering.dll
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\bin\Debug\net8.0\appsettings.Development.json
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\bin\Debug\net8.0\appsettings.json
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\bin\Debug\net8.0\PromptEngineering.exe
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\bin\Debug\net8.0\PromptEngineering.deps.json
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\bin\Debug\net8.0\PromptEngineering.runtimeconfig.json
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\bin\Debug\net8.0\PromptEngineering.dll
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\bin\Debug\net8.0\PromptEngineering.pdb
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\bin\Debug\net8.0\Npgsql.dll
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\obj\Debug\net8.0\PromptEngineering.csproj.AssemblyReference.cache
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\obj\Debug\net8.0\PromptEngineering.GeneratedMSBuildEditorConfig.editorconfig
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\obj\Debug\net8.0\PromptEngineering.AssemblyInfoInputs.cache
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\obj\Debug\net8.0\PromptEngineering.AssemblyInfo.cs
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\obj\Debug\net8.0\PromptEngineering.csproj.CoreCompileInputs.cache
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\obj\Debug\net8.0\PromptEngineering.MvcApplicationPartsAssemblyInfo.cs
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\obj\Debug\net8.0\PromptEngineering.MvcApplicationPartsAssemblyInfo.cache
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\obj\Debug\net8.0\staticwebassets.build.json
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\obj\Debug\net8.0\staticwebassets.development.json
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.PromptEngineering.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.build.PromptEngineering.props
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.PromptEngineering.props
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.PromptEngineering.props
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\obj\Debug\net8.0\scopedcss\bundle\PromptEngineering.styles.css
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\obj\Debug\net8.0\PromptEn.9222F31A.Up2Date
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\obj\Debug\net8.0\PromptEngineering.dll
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\obj\Debug\net8.0\refint\PromptEngineering.dll
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\obj\Debug\net8.0\PromptEngineering.pdb
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\obj\Debug\net8.0\PromptEngineering.genruntimeconfig.cache
+C:\Gabriel\TSS Next Gen\Offerings\Copilot\Prompt_Buddy_API_V1\Prompt Buddy API_V1\PromptEngineering\obj\Debug\net8.0\ref\PromptEngineering.dll
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\obj\Debug\net8.0\PromptEngineering.csproj.AssemblyReference.cache
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\obj\Debug\net8.0\PromptEngineering.GeneratedMSBuildEditorConfig.editorconfig
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\obj\Debug\net8.0\PromptEngineering.AssemblyInfoInputs.cache
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\obj\Debug\net8.0\PromptEngineering.AssemblyInfo.cs
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\obj\Debug\net8.0\PromptEngineering.csproj.CoreCompileInputs.cache
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\obj\Debug\net8.0\PromptEngineering.MvcApplicationPartsAssemblyInfo.cs
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\obj\Debug\net8.0\PromptEngineering.MvcApplicationPartsAssemblyInfo.cache
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\obj\Debug\net8.0\PromptEngineering.dll
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\obj\Debug\net8.0\refint\PromptEngineering.dll
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\obj\Debug\net8.0\PromptEngineering.pdb
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\bin\Debug\net8.0\appsettings.Development.json
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\bin\Debug\net8.0\appsettings.json
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\bin\Debug\net8.0\PromptEngineering.exe
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\bin\Debug\net8.0\PromptEngineering.deps.json
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\bin\Debug\net8.0\PromptEngineering.runtimeconfig.json
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\bin\Debug\net8.0\PromptEngineering.dll
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\bin\Debug\net8.0\PromptEngineering.pdb
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\bin\Debug\net8.0\AutoMapper.dll
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\bin\Debug\net8.0\Npgsql.dll
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\bin\Debug\net8.0\OpenAI.dll
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\bin\Debug\net8.0\System.ClientModel.dll
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\bin\Debug\net8.0\System.Memory.Data.dll
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\obj\Debug\net8.0\staticwebassets.build.json
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\obj\Debug\net8.0\staticwebassets.development.json
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.PromptEngineering.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.build.PromptEngineering.props
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.PromptEngineering.props
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.PromptEngineering.props
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\obj\Debug\net8.0\scopedcss\bundle\PromptEngineering.styles.css
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\obj\Debug\net8.0\PromptEngineering.csproj.CopyComplete
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\obj\Debug\net8.0\PromptEngineering.genruntimeconfig.cache
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\obj\Debug\net8.0\ref\PromptEngineering.dll
+C:\Gabriel\SourceCode\Prompt Buddy V2\PromptEngineering\obj\Debug\net8.0\PromptEngineering.sourcelink.json
