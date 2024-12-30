@@ -215,8 +215,8 @@ namespace PromptEngineering.Repository
                     connection.Open();
                     using (var command = new NpgsqlCommand(sql, connection))
                     {
-                        command.Parameters.AddWithValue("@message_id", chats.MessageId);
-                        command.Parameters.AddWithValue("@conversation_id", chats.ConversationId);
+                        command.Parameters.AddWithValue("@message_id", (string.IsNullOrEmpty(chats.MessageId) ? "" : chats.MessageId));
+                        command.Parameters.AddWithValue("@conversation_id", (string.IsNullOrEmpty(chats.ConversationId) ? "" : chats.ConversationId));
                         command.Parameters.AddWithValue("@llm", chats.LLM);
                         command.Parameters.AddWithValue("@ai_model", chats.Model);
                         command.Parameters.AddWithValue("@prog_lang", chats.Language);
@@ -259,7 +259,7 @@ namespace PromptEngineering.Repository
             var result = string.Empty;
             try
             {
-                var sql = @$"select result from chats where feedback='helpful' and llm=@llm and ai_model=@ai_model and prog_lang=@prog_lang and phase=@phase and isnull(phase_optional,'')=isnull(@phase_optional,'') and prompt=@prompt and reference=@reference and user_name=@user_name order by chat_id desc limit 1;";
+                var sql = @$"select result from chats where feedback='helpful' and llm=@llm and ai_model=@ai_model and prog_lang=@prog_lang and phase=@phase and ISNULL(phase_optional,'')=ISNULL(@phase_optional,'') and prompt=@prompt and reference=@reference and user_name=@user_name order by chat_id desc limit 1;";
 
                 using (var connection = new NpgsqlConnection(_connectionString))
                 {
