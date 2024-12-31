@@ -35,9 +35,9 @@ namespace PromptEngineering.Services
             _httpClient = httpClientFactory.CreateClient();
         }
         
-        public async Task<IEnumerable<ChatMessage>> GetAllChatMessages(string userName, string startDate = "", string endDate="")
+        public async Task<IEnumerable<ChatMessage>> GetAllChatMessages(string userName, string startDate = "", string endDate="",string aiModel="")
         {
-            return await _chatRepository.GetAllChatMessagesAsync(userName, startDate,endDate);
+            return await _chatRepository.GetAllChatMessagesAsync(userName, startDate,endDate,aiModel);
         }
 
         public async Task<DashboardInfoPromptEnggTypes> GetNumbersOfPromptEnggTypes()

@@ -25,14 +25,18 @@ namespace PromptEngineering.Repository
         }
 
         #region GetAllChatMessages
-        public async Task<IEnumerable<ChatMessage>> GetAllChatMessagesAsync(string userName, string startDate = "",string endDate="")
+        public async Task<IEnumerable<ChatMessage>> GetAllChatMessagesAsync(string userName, string startDate = "",string endDate="", string aiModel = "")
         {
-            _logger.LogInformation($"GetAllChatMessagesAsync method Input {userName} {startDate} {endDate}");
+            _logger.LogInformation($"GetAllChatMessagesAsync method Input {userName} {startDate} {endDate} {aiModel}");
             var chatMessages = new List<ChatMessage>();
             try
             {
                 var sql = @"select llm,ai_model,prog_lang, phase,phase_optional,prompt,reference,result,status,attempt,success,requested_time,responded_time,user_name,prompt_engg_type,chat_id,feedback from  chats where  user_name=@user_name";
-                if ((!string.IsNullOrEmpty(startDate) && string.IsNullOrEmpty(endDate))||(!string.IsNullOrEmpty(startDate) && string.Equals(startDate,endDate,StringComparison.OrdinalIgnoreCase)))
+                if (!string.IsNullOrEmpty(aiModel))
+                {
+                    sql += " and ai_model=@ai_model";
+                }
+                else if ((!string.IsNullOrEmpty(startDate) && string.IsNullOrEmpty(endDate))||(!string.IsNullOrEmpty(startDate) && string.Equals(startDate,endDate,StringComparison.OrdinalIgnoreCase)))
                 {
                     sql += " and cast(requested_time as date)=cast(@requested_time as date)";
                 }
@@ -50,8 +54,11 @@ namespace PromptEngineering.Repository
                     using (var command = new NpgsqlCommand(sql, connection))
                     {                        
                         command.Parameters.AddWithValue("@user_name", userName);
-                        
-                        if ((!string.IsNullOrEmpty(startDate) && string.IsNullOrEmpty(endDate)) || ( !string.IsNullOrEmpty(startDate)&& string.Equals(startDate, endDate, StringComparison.OrdinalIgnoreCase)))
+                        if (!string.IsNullOrEmpty(aiModel))
+                        {
+                            command.Parameters.AddWithValue("@ai_model", aiModel);
+                        }
+                        else if ((!string.IsNullOrEmpty(startDate) && string.IsNullOrEmpty(endDate)) || ( !string.IsNullOrEmpty(startDate)&& string.Equals(startDate, endDate, StringComparison.OrdinalIgnoreCase)))
                         {
                             command.Parameters.AddWithValue("@requested_time", DateTime.Parse(startDate).ToString("yyyy-MM-dd"));
                         }
@@ -68,7 +75,7 @@ namespace PromptEngineering.Repository
                             {
                                 string feedback=(reader.IsDBNull(16)?"":reader.GetString(16));
                                 var aiSendMessage = new ChatMessage();
-                                string sendMessage = @$"AI Model: {reader.GetString(0)}-{reader.GetString(1)}, Language: {reader.GetString(2)}, Phase: {reader.GetString(3)}, Prompt:{reader.GetString(5)}, Reference: {reader.GetString(6)}";
+                                string sendMessage = @$"AI Model: {reader.GetString(0)}|{reader.GetString(1)}, Language: {reader.GetString(2)}, Phase: {reader.GetString(3)}, Prompt:{reader.GetString(5)}, Reference: {reader.GetString(6)}";
                                 aiSendMessage.MessageText = sendMessage.ReplaceEscapeChars();
                                 aiSendMessage.MessageSender = MessageSender.User;
                                 aiSendMessage.MessageDate = reader.GetDateTime(11);

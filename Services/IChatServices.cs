@@ -9,7 +9,7 @@ namespace PromptEngineering.Services
     {
         Task<ChatMessage> GetChatMessage(ChatInput input);
 
-        Task<IEnumerable<ChatMessage>> GetAllChatMessages(string userName, string startDate = "", string endDate = "");
+        Task<IEnumerable<ChatMessage>> GetAllChatMessages(string userName, string startDate = "", string endDate = "", string aiModel = "");
 
         Task<DashboardInfoPromptEnggTypes> GetNumbersOfPromptEnggTypes();
 

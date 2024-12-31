@@ -10,7 +10,7 @@ namespace PromptEngineering.Repository
     /// </summary>
     public interface IChatRepository
     {
-        Task<IEnumerable<ChatMessage>> GetAllChatMessagesAsync(string userName, string startDate = "", string endDate = "");
+        Task<IEnumerable<ChatMessage>> GetAllChatMessagesAsync(string userName, string startDate = "", string endDate = "", string aiModel = "");
 
         Task<DashboardInfoPromptEnggTypes> GetNumbersOfPromptEnggTypesAsync();
 

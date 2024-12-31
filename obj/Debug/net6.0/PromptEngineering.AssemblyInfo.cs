@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PromptEngineering")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aecf2b3a85b4086fd5a24e849440b5bbccf35aed")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+34f11152db5899589017a531a143b0725f3d79cc")]
 [assembly: System.Reflection.AssemblyProductAttribute("PromptEngineering")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PromptEngineering")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
