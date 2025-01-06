@@ -38,7 +38,7 @@ namespace PromptEngineering.Repository
                             {                                
                                 var pLang = new ProgLangModel();
                                 pLang.LangId = reader.GetInt32(0);
-                                pLang.LangName = reader.GetString(1);
+                                pLang.LangName = (reader.IsDBNull(1) ? string.Empty : reader.GetString(1));
                                 pLang.LangType = reader.GetString(2);
                                 progLangs.Add(pLang);
                             }
@@ -72,7 +72,7 @@ namespace PromptEngineering.Repository
                             {
                                 var offeringM = new OfferingModel();
                                 offeringM.OfferingId = reader.GetInt32(0);
-                                offeringM.OfferingName = reader.GetString(1);                                
+                                offeringM.OfferingName = (reader.IsDBNull(1) ? string.Empty : reader.GetString(1));                                
                                 offerings.Add(offeringM);
                             }
                         }
@@ -105,7 +105,7 @@ namespace PromptEngineering.Repository
                             {
                                 var phaseM = new PhaseModel();
                                 phaseM.PhaseId = reader.GetInt32(0);
-                                phaseM.PhaseName = reader.GetString(1);
+                                phaseM.PhaseName = (reader.IsDBNull(1) ? string.Empty : reader.GetString(1));
                                 phases.Add(phaseM);
                             }
                         }
@@ -139,9 +139,9 @@ namespace PromptEngineering.Repository
                             {
                                 var roleM = new RoleModel();
                                 roleM.RoleId = reader.GetInt32(0);
-                                roleM.RoleName = reader.GetString(1);
-                                roleM.IsManager = reader.GetBoolean(2);
-                                roleM.IsAdmin = reader.GetBoolean(3);
+                                roleM.RoleName = (reader.IsDBNull(1) ? string.Empty : reader.GetString(1));
+                                roleM.IsManager = reader.IsDBNull(2)?false:reader.GetBoolean(2);
+                                roleM.IsAdmin = reader.IsDBNull(3) ? false : reader.GetBoolean(3); 
                                 roles.Add(roleM);
                             }
                         }
@@ -175,11 +175,11 @@ namespace PromptEngineering.Repository
                             {
                                 var userM = new UserModel();
                                 userM.UserId = reader.GetInt32(0);
-                                userM.UserName = reader.GetString(1);
-                                userM.DisplayName = reader.GetString(2);
-                                userM.ManagerId = reader.GetInt32(3);
-                                userM.Password = reader.GetString(4);
-                                userM.Email = reader.GetString(5);
+                                userM.UserName = (reader.IsDBNull(1) ? string.Empty : reader.GetString(1));
+                                userM.DisplayName = (reader.IsDBNull(2) ? string.Empty : reader.GetString(2)); 
+                                userM.ManagerId = reader.IsDBNull(3) ? 0 : reader.GetInt32(3);
+                                userM.Password = (reader.IsDBNull(4) ? string.Empty : reader.GetString(4));
+                                userM.Email = (reader.IsDBNull(5)? string.Empty:reader.GetString(5));
                                 users.Add(userM);
                             }
                         }
