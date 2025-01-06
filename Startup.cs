@@ -40,6 +40,8 @@ namespace PromptEngineering
             services.AddScoped<IChatServices, ChatServices>();
             services.AddScoped<IMasterRepository, MasterRepository>();
             services.AddScoped<IMasterServices, MasterServices>();
+            services.AddScoped<IUsersRepository, UsersRepository>();
+            services.AddScoped<IUsersServices, UsersServices>();
 
             // Register the HttpClientFactory
             services.AddHttpClient();
