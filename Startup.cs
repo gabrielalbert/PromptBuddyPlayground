@@ -31,6 +31,8 @@ namespace PromptEngineering
                 .WithExposedHeaders("*")
                 .AllowAnyHeader();
             }));
+            // Register the configuration class
+            services.Configure<MySettings>(Configuration.GetSection("MySettings"));
 
             // Add AutoMapper services            
             services.AddAutoMapper(cfg => cfg.AddMaps(GetType().Assembly, typeof(MappingProfile).Assembly));
@@ -42,6 +44,8 @@ namespace PromptEngineering
             services.AddScoped<IMasterServices, MasterServices>();
             services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddScoped<IUsersServices, UsersServices>();
+            services.AddScoped<IFilesServices, FilesServices>();
+            services.AddScoped<ICopilotCLIServices, CopilotCLIServices>();
 
             // Register the HttpClientFactory
             services.AddHttpClient();

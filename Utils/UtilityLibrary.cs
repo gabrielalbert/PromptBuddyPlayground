@@ -1,5 +1,6 @@
 ﻿using System;
 using Npgsql;
+using PromptEngineering.Models;
 
 namespace PromptEngineering.Utils
 {
@@ -29,6 +30,21 @@ namespace PromptEngineering.Utils
         public static string ReplaceNewLineChars(this string str)
         {
             return str?.Replace("\r\n", "\n").Replace("\r", "\n");
+        }
+
+        public static string ReplaceNewLineToSpaceChars(this string str)
+        {
+            return str?.Replace("\r\n", " ").Replace("\n", " ").Replace("\r", " ");
+        }
+
+        public static string CleanCliOutput(this string str)
+        {
+            string prefixResultContent = (str.IndexOf(Configurations.COPILOT_CLI_RESPONSE_SANITIZE1) > 0 ? str.Substring(0, str.IndexOf(Configurations.COPILOT_CLI_RESPONSE_SANITIZE1) + 43) : string.Empty);
+            string postfixResultContent = (str.LastIndexOf(Configurations.COPILOT_CLI_RESPONSE_SANITIZE2) > 0 ? str.Substring(str.LastIndexOf(Configurations.COPILOT_CLI_RESPONSE_SANITIZE2)) : string.Empty);
+            str = (string.IsNullOrEmpty(prefixResultContent) ? str : str.Replace(prefixResultContent, string.Empty));
+            str = (string.IsNullOrEmpty(postfixResultContent) ? str : str.Replace(postfixResultContent, string.Empty));
+
+            return str;
         }
     }
     #endregion
