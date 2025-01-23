@@ -20,5 +20,8 @@ RUN dotnet publish "./PromptEngineering.csproj" -c $BUILD_CONFIGURATION -o /app/
 
 FROM base AS final
 WORKDIR /app
+user root
+RUN mkdir /app/Output
+RUN mkdir /app/UploadedFiles
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "PromptEngineering.dll"]
