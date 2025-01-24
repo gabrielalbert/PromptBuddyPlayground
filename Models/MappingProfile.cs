@@ -8,6 +8,7 @@ namespace PromptEngineering.Models
         {
             // Create a map between Product and ProductDTO
             CreateMap<ChatInput, Chats>();
+            CreateMap<UserViewModel, UserModel>();
 
         }
     }
