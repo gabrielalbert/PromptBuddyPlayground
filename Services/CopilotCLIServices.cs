@@ -241,9 +241,25 @@ namespace PromptEngineering.Services
         private void ExecuteCopilotCliCommandWithNoProxy(string command, out string output, out string error)
         {
             Process process = null;
+            output=string.Empty;
+            error = string.Empty;
             try
             {
-                process = DefaultProcessArguments(command);
+                process = new Process();
+
+
+                //process.StartInfo.FileName = Configurations.CMD;               
+
+                process.StartInfo.FileName = "/bin/bash";
+                process.StartInfo.WorkingDirectory = outputFolder;
+                process.StartInfo.Arguments = "-c \" " + command + " \"";
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.RedirectStandardOutput = true;
+                process.StartInfo.RedirectStandardInput = true;
+                process.StartInfo.RedirectStandardError = true;
+                process.StartInfo.CreateNoWindow = true;
+
+                //process = DefaultProcessArguments(command);
                 process.Start();
 
                 _logger.LogInformation("CLI Command Executed");
@@ -253,7 +269,13 @@ namespace PromptEngineering.Services
                 _logger.LogInformation($"CLI output string {output}");
                 error = process.StandardError.ReadToEnd();
                 output = output.CleanCliOutput();
+
             }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                //throw ex;
+            }           
             finally
             {
                 process.WaitForExit();
@@ -265,8 +287,8 @@ namespace PromptEngineering.Services
         private Process DefaultProcessArguments(string command)
         {
             Process process = new Process();
-            process.StartInfo.FileName = Configurations.CMD;
-            process.StartInfo.WorkingDirectory = outputFolder;
+            //process.StartInfo.FileName = "/bin/bash";// Configurations.CMD;
+            //process.StartInfo.WorkingDirectory = outputFolder;
             process.StartInfo.Arguments = $"/C {command}";
             process.StartInfo.RedirectStandardInput = true;
             process.StartInfo.RedirectStandardOutput = true;

@@ -16,6 +16,7 @@ namespace PromptEngineering.Repository
         Task<int> UpdateManagers(int userId, int managerId);
         Task<UserViewModel> GetUser(int userId);
         Task<int> UpdateUserRole(int userId, int roleId);
+        Task<UserViewModel> LoginUser(string userName, string password);
 
     }
 }

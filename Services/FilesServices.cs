@@ -6,6 +6,7 @@ using System;
 using System.Threading.Tasks;
 using PromptEngineering.Models;
 using Npgsql;
+using System.Text;
 
 namespace PromptEngineering.Services
 {
@@ -44,6 +45,23 @@ namespace PromptEngineering.Services
                 await File.WriteAllBytesAsync(filePath, ms.ToArray());                
             }
             return uniqueFileName;
-        }        
+        }
+
+        public async Task<string> ReadFileContent(string fileName)
+        {
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UploadedFiles", fileName);
+            if (!System.IO.File.Exists(filePath))
+            {
+                throw new FileNotFoundException(" Payload File not Found");
+            }
+
+            using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            {
+                using (var reader = new StreamReader(stream, Encoding.UTF8))
+                {
+                    return await reader.ReadToEndAsync();
+                }
+            }
+        }
     }
 }

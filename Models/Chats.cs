@@ -26,6 +26,8 @@ namespace PromptEngineering.Models
         public int TotalTokens { get; set; }
         public string SelectedUser { get; set; }
         public string SelectedRole { get; set; }
+        public bool FileReference { get; set; } = false;
+        public string FileName { get; set; }
 
     }
 }

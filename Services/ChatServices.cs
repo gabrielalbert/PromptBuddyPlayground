@@ -25,11 +25,16 @@ namespace PromptEngineering.Services
         private readonly HttpClient _httpClient;
         private readonly IMapper _mapper;
         private readonly MySettings _settings;
+        private readonly ICopilotCLIServices _copilotCLIServices;
+        private readonly IFilesServices _filesServices;
 
 
-        public ChatServices(ILogger<ChatServices> logger, IMapper mapper, IChatRepository chatRepository, IHttpClientFactory httpClientFactory, IOptions<MySettings> settings)
+
+        public ChatServices(ILogger<ChatServices> logger, IFilesServices filesServices, ICopilotCLIServices copilotCLIServices, IMapper mapper, IChatRepository chatRepository, IHttpClientFactory httpClientFactory, IOptions<MySettings> settings)
         {
             _logger = logger;
+            _filesServices = filesServices;
+            _copilotCLIServices = copilotCLIServices;
             _mapper = mapper;
             _chatRepository = chatRepository;            
             _httpClient = httpClientFactory.CreateClient();
@@ -61,11 +66,16 @@ namespace PromptEngineering.Services
             int chatId = 0;
             try
             {
+
                 string result = await _chatRepository.GetChatMessage(input);
-                
+
+                var referenceFileName = (input.FileReference ? input.Reference : string.Empty);
+                input.Reference=await _filesServices.ReadFileContent(input.Reference);
+
                 Chats chats = _mapper.Map<Chats>(input);
                 chats.RequestedTime = DateTime.Now;
-
+                chats.FileName = (input.FileReference ? referenceFileName : string.Empty);
+                chats.MessageId = input.LLM.ToLower().Trim() + input.Model.ToLower().Trim();
                 if (!string.IsNullOrEmpty(result))
                 {
                     chats.RespondedTime = DateTime.Now;
@@ -85,8 +95,17 @@ namespace PromptEngineering.Services
                     replyMessage.Feedback = string.Empty;
                 }
                 else
-                {                    
-                    chats = await ZeroShotPrompt(chats);
+                {
+                    if (chats.LLM == "copilot" && chats.Model == "cli")
+                    {
+                        chats = await _copilotCLIServices.ExecuteCopilotCommand(chats, false);
+                    }
+                    else
+                    {
+                        chats = await ZeroShotPrompt(chats);
+                    }
+
+                    //chats = await ZeroShotPrompt(chats);
                     //if (chats.Success == false)
                     //{
                     //    chats = await OneShotPrompt(chats);

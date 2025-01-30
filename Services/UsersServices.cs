@@ -65,5 +65,11 @@ namespace PromptEngineering.Services
         {
             return await _usersRepository.GetUser(userId);
         }
+
+        public async Task<UserViewModel> LoginUser(string userName, string password)
+        {
+            return await _usersRepository.LoginUser(userName, password);
+        }
+
     }
 }

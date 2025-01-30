@@ -156,5 +156,21 @@ namespace PromptEngineering.Controllers
             }
             return Ok(response);
         }
+
+        [HttpGet]
+        [Route("login")]
+        [Produces("application/json")]
+        public async Task<IActionResult> LoginUser(string userName, string password)
+        {
+            _logger.LogInformation($"LoginUser request received at {DateTime.Now}");
+
+            var response = await _usersServices.LoginUser(userName, password);
+            if (response == null)
+            {
+                return NotFound();
+            }
+            return Ok(response);
+        }
+
     }
 }

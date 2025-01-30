@@ -23,5 +23,6 @@ WORKDIR /app
 user root
 RUN mkdir /app/Output
 RUN mkdir /app/UploadedFiles
+RUN mkdir /app/UploadedRepoFiles
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "PromptEngineering.dll"]

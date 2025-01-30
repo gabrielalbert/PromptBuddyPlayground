@@ -329,5 +329,55 @@ namespace PromptEngineering.Repository
             }
             return result;
         }
+
+        public async Task<UserViewModel> LoginUser(string userName, string password)
+        {
+            var userM = new UserViewModel();
+
+            try
+            {
+                var sql = @"select usr.user_id,usr.user_name,urm.role_id,r.role_name,usr.display_name from users usr 
+                            left join user_role_mapping urm ON usr.user_id =  urm.user_id 
+                            left join roles r on urm.role_id = r.role_id";
+                sql += " where usr.user_name = @userName and usr.password = @password;";
+
+                using (var connection = new NpgsqlConnection(_connectionString))
+                {
+                    await connection.OpenAsync();
+                    using (var command = new NpgsqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@userName", userName);
+                        command.Parameters.AddWithValue("@password", password);
+
+                        using (var reader = await command.ExecuteReaderAsync())
+                        {
+                            if (reader.HasRows)
+                            {
+                                while (await reader.ReadAsync())
+                                {
+                                    userM.UserId = reader.GetInt32(0);
+                                    userM.UserName = (reader.IsDBNull(1) ? string.Empty : reader.GetString(1));
+                                    userM.RoleId = reader.IsDBNull(2) ? 0 : reader.GetInt32(2);
+                                    userM.RoleName = (reader.IsDBNull(3) ? string.Empty : reader.GetString(3));
+                                    userM.DisplayName = (reader.IsDBNull(4) ? string.Empty : reader.GetString(4));
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                userM = null;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error: {ex.Message}");
+            }
+            return userM;
+
+        }
+
     }
 }

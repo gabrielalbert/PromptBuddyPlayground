@@ -25,18 +25,15 @@ namespace PromptEngineering.Repository
         }
 
         #region GetAllChatMessages
-        public async Task<IEnumerable<ChatMessage>> GetAllChatMessagesAsync(string userName, string startDate = "",string endDate="", string aiModel = "")
+        public async Task<IEnumerable<ChatMessage>> GetAllChatMessagesAsync(string userName, string messageId, string startDate = "",string endDate="")
         {
-            _logger.LogInformation($"GetAllChatMessagesAsync method Input {userName} {startDate} {endDate} {aiModel}");
+            _logger.LogInformation($"GetAllChatMessagesAsync method Input {userName} {messageId} {startDate} {endDate}");
             var chatMessages = new List<ChatMessage>();
             try
             {
-                var sql = @"select llm,ai_model,prog_lang, phase,phase_optional,prompt,reference,result,status,attempt,success,requested_time,responded_time,user_name,prompt_engg_type,chat_id,feedback from  chats where  user_name=@user_name";
-                if (!string.IsNullOrEmpty(aiModel))
-                {
-                    sql += " and ai_model=@ai_model";
-                }
-                else if ((!string.IsNullOrEmpty(startDate) && string.IsNullOrEmpty(endDate))||(!string.IsNullOrEmpty(startDate) && string.Equals(startDate,endDate,StringComparison.OrdinalIgnoreCase)))
+                var sql = @"select llm,ai_model,prog_lang, phase,phase_optional,prompt,reference,result,status,attempt,success,requested_time,responded_time,user_name,prompt_engg_type,chat_id,feedback from  chats where  user_name=@user_name and message_id=@message_id";
+                
+                if ((!string.IsNullOrEmpty(startDate) && string.IsNullOrEmpty(endDate))||(!string.IsNullOrEmpty(startDate) && string.Equals(startDate,endDate,StringComparison.OrdinalIgnoreCase)))
                 {
                     sql += " and cast(requested_time as date)=cast(@requested_time as date)";
                 }
@@ -54,11 +51,9 @@ namespace PromptEngineering.Repository
                     using (var command = new NpgsqlCommand(sql, connection))
                     {                        
                         command.Parameters.AddWithValue("@user_name", userName);
-                        if (!string.IsNullOrEmpty(aiModel))
-                        {
-                            command.Parameters.AddWithValue("@ai_model", aiModel);
-                        }
-                        else if ((!string.IsNullOrEmpty(startDate) && string.IsNullOrEmpty(endDate)) || ( !string.IsNullOrEmpty(startDate)&& string.Equals(startDate, endDate, StringComparison.OrdinalIgnoreCase)))
+                        command.Parameters.AddWithValue("@message_id", messageId);
+
+                        if ((!string.IsNullOrEmpty(startDate) && string.IsNullOrEmpty(endDate)) || ( !string.IsNullOrEmpty(startDate)&& string.Equals(startDate, endDate, StringComparison.OrdinalIgnoreCase)))
                         {
                             command.Parameters.AddWithValue("@requested_time", DateTime.Parse(startDate).ToString("yyyy-MM-dd"));
                         }
@@ -107,9 +102,9 @@ namespace PromptEngineering.Repository
             }
             return chatMessages;
         }
-        #endregion        
+        #endregion
 
-        #region GetNumbersOfPromptEnggTypes
+            #region GetNumbersOfPromptEnggTypes
         public async Task<DashboardInfoPromptEnggTypes> GetNumbersOfPromptEnggTypesAsync()
         {
             _logger.LogInformation($"GetNumbersOfPromptEnggTypesAsync method");
@@ -212,8 +207,8 @@ namespace PromptEngineering.Repository
             _logger.LogInformation($"AddChatsAsync method");
 
             var sql = @"INSERT INTO chats (message_id,conversation_id,llm,ai_model, prog_lang, phase,phase_optional,prompt,reference,result,status,attempt,success,requested_time,responded_time,input_tokens," +
-                "output_tokens,total_tokens,is_ai,user_name,role_name,prompt_engg_type) VALUES(@message_id,@conversation_id,@llm,@ai_model, @prog_lang, @phase,@phase_optional,@prompt,@reference,@result," +
-                "@status,@attempt,@success,@requested_time,@responded_time,@input_tokens,@output_tokens,@total_tokens,@is_ai,@user_name,@role_name,@prompt_engg_type) returning chat_id;";
+                "output_tokens,total_tokens,is_ai,user_name,role_name,prompt_engg_type,file_reference,file_name) VALUES(@message_id,@conversation_id,@llm,@ai_model, @prog_lang, @phase,@phase_optional,@prompt,@reference,@result," +
+                "@status,@attempt,@success,@requested_time,@responded_time,@input_tokens,@output_tokens,@total_tokens,@is_ai,@user_name,@role_name,@prompt_engg_type,@file_reference,@file_name) returning chat_id;";
 
             try
             {
@@ -243,7 +238,9 @@ namespace PromptEngineering.Repository
                         command.Parameters.AddWithValue("@is_ai", chats.AI);
                         command.Parameters.AddWithValue("@user_name", chats.SelectedUser);
                         command.Parameters.AddWithValue("@role_name", chats.SelectedRole);
-                        command.Parameters.AddWithValue("@prompt_engg_type", chats.PromptEnggType);                        
+                        command.Parameters.AddWithValue("@prompt_engg_type", chats.PromptEnggType);
+                        command.Parameters.AddWithValue("@file_reference", chats.FileReference);
+                        command.Parameters.AddWithValue("@file_name", (string.IsNullOrEmpty(chats.FileName) ? "" : chats.Result));
                         int chatId = (int)command.ExecuteScalar();
                         _logger.LogInformation("The row has been inserted successfully.");
                         return chatId;

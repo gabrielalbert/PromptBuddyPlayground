@@ -15,5 +15,6 @@ namespace PromptEngineering.Services
         Task<IEnumerable<UserModel>> GetReportingToUsers(int userId);
         Task<int> UpdateManagers(int userId, int managerId);
         Task<UserViewModel> GetUser(int userId);
+        Task<UserViewModel> LoginUser(string userName, string password);
     }
 }
