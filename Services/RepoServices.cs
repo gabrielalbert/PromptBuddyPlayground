@@ -11,13 +11,11 @@ namespace PromptEngineering.Services
 {
     public class RepoServices: IRepoServices
     {
-        private readonly IRepoRepository _repoRepository;
-        private readonly IMapper _mapper;        
+        private readonly IRepoRepository _repoRepository;        
         private readonly string _filesStoragePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UploadedRepoFiles");
 
-        public RepoServices(IMapper mapper, IRepoRepository repoRepository)
-        {
-            _mapper = mapper;
+        public RepoServices(IRepoRepository repoRepository)
+        {            
             _repoRepository = repoRepository;
         }
 

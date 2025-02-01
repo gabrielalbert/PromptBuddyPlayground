@@ -46,6 +46,9 @@ namespace PromptEngineering
             services.AddScoped<IUsersServices, UsersServices>();
             services.AddScoped<IFilesServices, FilesServices>();
             services.AddScoped<ICopilotCLIServices, CopilotCLIServices>();
+            services.AddScoped<IRepoRepository, RepoRepository>();
+            services.AddScoped<IRepoServices, RepoServices>();
+            //services.AddScoped<IHuggingFaceServices, HuggingFaceServices>();
 
             // Register the HttpClientFactory
             services.AddHttpClient();
@@ -60,7 +63,21 @@ namespace PromptEngineering
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+            //app.UseSwagger();
+            //app.UseSwaggerUI(c => c.SwaggerEndpoint("../swagger/v1/swagger.json", "PromptEngineering v1"));
+
+            //app.UseSwaggerUI(c =>
+            //{
+            //    string swaggerJsonBasePath = string.IsNullOrWhiteSpace(c.RoutePrefix) ? "." : "..";
+            //    c.SwaggerEndpoint($"{swaggerJsonBasePath}/swagger/v1/swagger.json", "PromptEngineering v1");
+
+            //});
+
+            if (env.IsDevelopment() || env.IsProduction())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
