@@ -32,38 +32,38 @@ namespace PromptEngineering.Controllers
             return Ok(new { reply = $"API GET is reachable" });
         }
 
-        [HttpPost]
-        [Route("message")]
-        [Produces("application/json")]
-        public async Task<IActionResult> GetChatMessage([FromBody] ChatInput input)
-        {
-            _logger.LogInformation($"GetChatMessage request received at {DateTime.Now}");
-            _logger.LogInformation("GetChatMessage request Inputs at {0}", JsonSerializer.Serialize(input));
+        //[HttpPost]
+        //[Route("message")]
+        //[Produces("application/json")]
+        //public async Task<IActionResult> GetChatMessage([FromBody] ChatInput input)
+        //{
+        //    _logger.LogInformation($"GetChatMessage request received at {DateTime.Now}");
+        //    _logger.LogInformation("GetChatMessage request Inputs at {0}", JsonSerializer.Serialize(input));
 
-            var response = await _chatServices.GetChatMessage(input);
-            if (response == null)
-            {
-                return NotFound();
-            }
-            return Ok(response);
-        }
+        //    var response = await _chatServices.GetChatMessage(input);
+        //    if (response == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(response);
+        //}
 
         
-        [HttpGet]
-        [Route("messages")]
-        [Produces("application/json")]
-        public async Task<IActionResult> GetChatMessages([FromHeader] string userName, [FromHeader] string startDate = "", [FromHeader] string endDate="")
-        {
-            _logger.LogInformation($"GetChatMessages Get request received at {DateTime.Now}");
-            _logger.LogInformation($"GetMessages Controller Input {userName} {startDate} {endDate}");
+        //[HttpGet]
+        //[Route("messages")]
+        //[Produces("application/json")]
+        //public async Task<IActionResult> GetChatMessages([FromHeader] string userName, [FromHeader] string startDate = "", [FromHeader] string endDate="")
+        //{
+        //    _logger.LogInformation($"GetChatMessages Get request received at {DateTime.Now}");
+        //    _logger.LogInformation($"GetMessages Controller Input {userName} {startDate} {endDate}");
 
-            var chatMessages = await _chatServices.GetAllChatMessages(userName, startDate,endDate);
-            if (chatMessages == null)
-            {
-                return NotFound();
-            }
-            return Ok(chatMessages);
-        }
+        //    var chatMessages = await _chatServices.GetAllChatMessages(userName, startDate,endDate);
+        //    if (chatMessages == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(chatMessages);
+        //}
 
         [HttpGet]
         [Route("dashboard")]
@@ -76,37 +76,37 @@ namespace PromptEngineering.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
-        [Route("autocomplete")]
-        [Produces("application/json")]
-        public async Task<IActionResult> GetAutoCompleteSuggestions([FromHeader] string aiModel, [FromQuery] string query)
-        {
-            _logger.LogInformation($"GetAutoCompleteSuggestions Get request received at {DateTime.Now}");
+        //[HttpGet]
+        //[Route("autocomplete")]
+        //[Produces("application/json")]
+        //public async Task<IActionResult> GetAutoCompleteSuggestions([FromHeader] string aiModel, [FromQuery] string query)
+        //{
+        //    _logger.LogInformation($"GetAutoCompleteSuggestions Get request received at {DateTime.Now}");
 
-            if (string.IsNullOrEmpty(query))
-            {
-                return BadRequest("Query parameter is required.");
-            }
-            var suggestions = await _chatServices.GetAutoCompleteSuggestions(aiModel, query);           
-            return Ok(suggestions);
-        }
+        //    if (string.IsNullOrEmpty(query))
+        //    {
+        //        return BadRequest("Query parameter is required.");
+        //    }
+        //    var suggestions = await _chatServices.GetAutoCompleteSuggestions(aiModel, query);           
+        //    return Ok(suggestions);
+        //}
 
-        [HttpPut]
-        [Route("feedback/{feedback}/{chatId}")]
-        [Produces("application/json")]
-        public async Task<IActionResult> UpdateFeedback(string chatId, string feedback)
-        {
-            _logger.LogInformation($"UpdateFeedback Post request received at {DateTime.Now}");
-            _logger.LogInformation($"UpdateFeedback Controller Input {chatId} {feedback}");
+        //[HttpPut]
+        //[Route("feedback/{feedback}/{chatId}")]
+        //[Produces("application/json")]
+        //public async Task<IActionResult> UpdateFeedback(string chatId, string feedback)
+        //{
+        //    _logger.LogInformation($"UpdateFeedback Post request received at {DateTime.Now}");
+        //    _logger.LogInformation($"UpdateFeedback Controller Input {chatId} {feedback}");
 
-            if (string.IsNullOrEmpty(feedback))
-            {
-                return BadRequest("Feedback parameter is required.");
-            }
-            await _chatServices.UpdateFeedback(Convert.ToInt32(chatId), feedback);
+        //    if (string.IsNullOrEmpty(feedback))
+        //    {
+        //        return BadRequest("Feedback parameter is required.");
+        //    }
+        //    await _chatServices.UpdateFeedback(Convert.ToInt32(chatId), feedback);
             
-            return Ok();
-        }
+        //    return Ok();
+        //}
     }
 
 }

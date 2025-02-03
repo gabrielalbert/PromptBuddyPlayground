@@ -24,18 +24,7 @@ namespace PromptEngineering.Controllers
             _logger = logger;
             _chatServices = chatServices;
         }
-
-        [HttpGet]
-        [Route("health")]
-        [Produces("application/json")]
-        public async Task<IActionResult> HealthCheck()
-        {
-            _logger.LogInformation($"HealthCheck request received at {DateTime.Now}");
-            _logger.LogInformation($"HealthCheck GET request received at {DateTime.Now}");
-
-            return Ok(new { reply = $"API GET is reachable" });
-        }
-
+                
         [HttpPost]
         [Route("message")]
         [Produces("application/json")]
