@@ -41,9 +41,9 @@ namespace PromptEngineering.Services
         }
         
 
-        public async Task<IEnumerable<ChatMessage>> GetAllChatMessages(string userName, string startDate = "", string endDate="",string aiModel="")
+        public async Task<IEnumerable<ChatMessage>> GetAllChatMessages(string userName, string messageId, string startDate = "", string endDate="")
         {
-            return await _chatRepository.GetAllChatMessagesAsync(userName, startDate,endDate,aiModel);
+            return await _chatRepository.GetAllChatMessagesAsync(userName,messageId, startDate,endDate);
         }
 
         public async Task<DashboardInfoPromptEnggTypes> GetNumbersOfPromptEnggTypes()
@@ -71,7 +71,11 @@ namespace PromptEngineering.Services
                 string result = await _chatRepository.GetChatMessage(input);
 
                 var referenceFileName = (input.FileReference ? input.Reference : string.Empty);
-                input.Reference=await _filesServices.ReadFileContent(input.Reference);
+                if(input.FileReference)
+                {
+                    input.Reference = await _filesServices.ReadFileContent(input.Reference);
+                }
+                
 
                 Chats chats = _mapper.Map<Chats>(input);
                 chats.RequestedTime = DateTime.Now;

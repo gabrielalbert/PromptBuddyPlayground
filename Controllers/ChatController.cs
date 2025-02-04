@@ -50,7 +50,7 @@ namespace PromptEngineering.Controllers
             _logger.LogInformation($"GetChatMessages Get request received at {DateTime.Now}");
             _logger.LogInformation($"GetMessages Controller Input {userName} {startDate} {endDate} {aiModel}");
 
-            var chatMessages = await _chatServices.GetAllChatMessages(userName, startDate, endDate,aiModel);
+            var chatMessages = await _chatServices.GetAllChatMessages(userName, aiModel, startDate, endDate);
             if (chatMessages == null)
             {
                 return NotFound();

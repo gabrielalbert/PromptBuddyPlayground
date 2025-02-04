@@ -51,7 +51,7 @@ namespace PromptEngineering.Repository
                     using (var command = new NpgsqlCommand(sql, connection))
                     {                        
                         command.Parameters.AddWithValue("@user_name", userName);
-                        command.Parameters.AddWithValue("@message_id", messageId);
+                        command.Parameters.AddWithValue("@message_key", messageId);
 
                         if ((!string.IsNullOrEmpty(startDate) && string.IsNullOrEmpty(endDate)) || ( !string.IsNullOrEmpty(startDate)&& string.Equals(startDate, endDate, StringComparison.OrdinalIgnoreCase)))
                         {
