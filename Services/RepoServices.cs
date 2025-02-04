@@ -19,20 +19,22 @@ namespace PromptEngineering.Services
             _repoRepository = repoRepository;
         }
 
-        public async Task AddRepoFiles(IFormFile[] files, string repoName)
+        public async Task<List<RepoModel>> AddRepoFiles(IFormFile[] files, string repoName)
         {
+            List<RepoModel> result=new List<RepoModel>();
             var repoPath = Path.Combine(_filesStoragePath, repoName);
             if (!Directory.Exists(repoPath))
             {
                 Directory.CreateDirectory(repoPath);
             }
             foreach (var file in files)
-            {                
-                await SaveRepoFileToLocal(repoName,repoPath,file);
+            {
+                result.Add(await SaveRepoFileToLocal(repoName,repoPath,file));
             }
+             return result;
         }
 
-        private async Task SaveRepoFileToLocal(string repoName,string filePath, IFormFile file)
+        private async Task<RepoModel> SaveRepoFileToLocal(string repoName,string filePath, IFormFile file)
         {
             var uniqueFileName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
             var addRepoFilePath = Path.Combine(filePath, uniqueFileName);
@@ -49,6 +51,7 @@ namespace PromptEngineering.Services
                 Timestamp = DateTime.UtcNow
             };
             await _repoRepository.AddRepoFiles(fileData);
+            return fileData;
         }
 
         public async Task<List<string>> GetAllRepos()

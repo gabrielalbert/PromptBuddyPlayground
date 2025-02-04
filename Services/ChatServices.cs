@@ -40,6 +40,7 @@ namespace PromptEngineering.Services
             _httpClient = httpClientFactory.CreateClient();
         }
         
+
         public async Task<IEnumerable<ChatMessage>> GetAllChatMessages(string userName, string startDate = "", string endDate="",string aiModel="")
         {
             return await _chatRepository.GetAllChatMessagesAsync(userName, startDate,endDate,aiModel);
@@ -75,7 +76,7 @@ namespace PromptEngineering.Services
                 Chats chats = _mapper.Map<Chats>(input);
                 chats.RequestedTime = DateTime.Now;
                 chats.FileName = (input.FileReference ? referenceFileName : string.Empty);
-                chats.MessageId = input.LLM.ToLower().Trim() + input.Model.ToLower().Trim();
+                chats.MessageKey = string.Concat(input.LLM.ToLower().Trim(),"|", input.Model.ToLower().Trim());
                 if (!string.IsNullOrEmpty(result))
                 {
                     chats.RespondedTime = DateTime.Now;
@@ -100,22 +101,20 @@ namespace PromptEngineering.Services
                     {
                         chats = await _copilotCLIServices.ExecuteCopilotCommand(chats, false);
                     }
-                    else
+                    else 
                     {
-                        chats = await ZeroShotPrompt(chats);
+                        chats = await Prompting(chats);
+                        if (chats.ConversationId > 0)
+                        {
+                            chats.PromptEnggType = PromptEnggType.ChainofThought;
+                        }
+                        else
+                        {
+                            chats.PromptEnggType = PromptEnggType.ZeroShot;
+                        }
+
                     }
-
-                    //chats = await ZeroShotPrompt(chats);
-                    //if (chats.Success == false)
-                    //{
-                    //    chats = await OneShotPrompt(chats);
-                    //}
-
-                    //if (chats.Success == false)
-                    //{
-                    //    chats = await IterativePrompt(chats);
-                    //}
-
+                    replyMessage.RawMessageText = chats.Result;
                     replyMessage.MessageText = chats.Result.ReplaceEscapeChars();
                     replyMessage.MessageSender = "bot";
                     replyMessage.MessageDate = chats.RespondedTime;
@@ -132,14 +131,37 @@ namespace PromptEngineering.Services
             catch (Exception ex)
             {
                 replyMessage.ChatId = -1;
+                replyMessage.RawMessageText = ex.Message;
                 replyMessage.MessageText = "An error occurred";
                 replyMessage.MessageSender = MessageSender.Bot;
                 replyMessage.Feedback = string.Empty;
                 replyMessage.MessageDate = DateTime.Now;
                 replyMessage.MessageId = -1;
+                replyMessage.PromptEnggType = "Exception";
                 _logger.LogError(ex.Message);
             }
             return replyMessage;
+        }
+
+        private async Task<Chats> Prompting(Chats message)
+        {
+
+            try
+            {
+                string promptCommand = GetPromptCommand(message.Phase, message.Prompt, message.Reference, message.Language, message.PhaseOptional);
+
+                _logger.LogInformation($"Prompting Prompt Command: {promptCommand}");
+                RetriveFromAi(ref message, promptCommand);
+                message.PromptMessage = promptCommand;                
+                _logger.LogInformation($"Prompting output string {message.Result}");
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation($"ChainPrompt failed: {ex.Message}");
+            }
+
+            return message;
         }
 
         private async Task<Chats> ZeroShotPrompt(Chats message)
@@ -151,16 +173,9 @@ namespace PromptEngineering.Services
 
                 _logger.LogInformation($"ZeroShotPrompt Prompt Command: {promptCommand}");
                 RetriveFromAi(ref message,promptCommand);
-                _logger.LogInformation($"ZeroShotPrompt output string {message.Result}");
-                //if (message.Result != Configurations.NO_TEXT_FOUND)
-                //{
-                //    message.Attempt = 0;
-                //    message.Result = output;
-                //    message.RespondedTime = DateTime.Now;
-                //    message.Status = "Completed";
-                //    message.PromptEnggType = PromptEnggType.ZeroShot;
-                //    message.Success = true;
-                //}
+                message.PromptMessage = promptCommand;
+                message.PromptEnggType = PromptEnggType.ZeroShot;
+                _logger.LogInformation($"ZeroShotPrompt output string {message.Result}");                
 
             }
             catch (Exception ex)
@@ -259,7 +274,27 @@ namespace PromptEngineering.Services
             }
 
         }
-                
+        private List<OpenAI.Chat.ChatMessage> buildConversations(int conversationId = 0)
+        {
+            List<OpenAI.Chat.ChatMessage> messages = new List<OpenAI.Chat.ChatMessage>();
+
+            if(conversationId > 0)
+            {
+                var conversations = _chatRepository.GetConversations(conversationId);
+                foreach(var conversation in conversations)
+                {
+                    var userRequest = new UserChatMessage(conversation.PromptMessgae);
+                    messages.Add(userRequest);
+                    var aiResponse = new AssistantChatMessage(conversation.AiResponse);
+                    messages.Add(aiResponse);
+
+                }
+            }
+
+            return messages;
+
+        }
+
 
         private void RetriveFromAi(ref Chats message,string command)
         {
@@ -276,11 +311,9 @@ namespace PromptEngineering.Services
             
             try
             {
+                var messages = buildConversations(message.ConversationId);
 
-                List<OpenAI.Chat.ChatMessage> messages = new List<OpenAI.Chat.ChatMessage>()
-                {
-                    new UserChatMessage(command),
-                };
+                messages.Add(new UserChatMessage(command));
 
                 var requestOptions = new ChatCompletionOptions()
                 {
@@ -291,7 +324,7 @@ namespace PromptEngineering.Services
                 message.Result = response.Value.Content[0].Text;
                 message.RespondedTime = DateTime.Now;
                 message.Status = "Completed";
-                message.PromptEnggType = PromptEnggType.ZeroShot;
+                
                 message.Success = true;
                 message.AI = true;
                 message.Attempt = 1;

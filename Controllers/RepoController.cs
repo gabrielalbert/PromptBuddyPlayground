@@ -31,16 +31,16 @@ namespace PromptEngineering.Controllers
 
             if (files == null || files.Length == 0)
             {
-                return BadRequest("Folder is Empty");
+                return BadRequest("No files uploaded");
             }
 
-            await _repoServices.AddRepoFiles(files, repoName);
+            var response=await _repoServices.AddRepoFiles(files, repoName);
 
-            //if (response == null)
-            //{
-            //    return NotFound();
-            //}
-            return Ok();// new { FileName = response });
+            if (response == null)
+            {
+                return NotFound();
+            }
+            return Ok(response);// new { FileName = response });
         }
 
         [HttpGet]

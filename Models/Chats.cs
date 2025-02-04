@@ -4,8 +4,8 @@ namespace PromptEngineering.Models
 {
     public class Chats
     {
-        public string MessageId { get; set; }
-        public string ConversationId { get; set; }
+        public string MessageKey { get; set; }
+        public int ConversationId { get; set; }
         public string LLM { get; set; }
         public string Model { get; set; }
         public string Language { get; set; }
@@ -28,6 +28,7 @@ namespace PromptEngineering.Models
         public string SelectedRole { get; set; }
         public bool FileReference { get; set; } = false;
         public string FileName { get; set; }
+        public string PromptMessage { get; set; }
 
     }
 }

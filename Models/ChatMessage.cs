@@ -11,5 +11,6 @@ namespace PromptEngineering.Models
         public DateTime MessageDate { get; set; }        
         public string PromptEnggType { get; set; }
         public string Feedback {get;set;}
+        public string RawMessageText { get; set; }
     }
 }

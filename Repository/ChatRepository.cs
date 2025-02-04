@@ -31,7 +31,7 @@ namespace PromptEngineering.Repository
             var chatMessages = new List<ChatMessage>();
             try
             {
-                var sql = @"select llm,ai_model,prog_lang, phase,phase_optional,prompt,reference,result,status,attempt,success,requested_time,responded_time,user_name,prompt_engg_type,chat_id,feedback from  chats where  user_name=@user_name and message_id=@message_id";
+                var sql = @"select llm,ai_model,prog_lang, phase,phase_optional,prompt,reference,result,status,attempt,success,requested_time,responded_time,user_name,prompt_engg_type,chat_id,feedback from  chats where  user_name=@user_name and message_key=@message_key";
                 
                 if ((!string.IsNullOrEmpty(startDate) && string.IsNullOrEmpty(endDate))||(!string.IsNullOrEmpty(startDate) && string.Equals(startDate,endDate,StringComparison.OrdinalIgnoreCase)))
                 {
@@ -71,6 +71,7 @@ namespace PromptEngineering.Repository
                                 string feedback=(reader.IsDBNull(16)?"":reader.GetString(16));
                                 var aiSendMessage = new ChatMessage();
                                 string sendMessage = @$"AI Model: {reader.GetString(0)}|{reader.GetString(1)}, Language: {reader.GetString(2)}, Phase: {reader.GetString(3)}, Prompt:{reader.GetString(5)}, Reference: {reader.GetString(6)}";
+                                aiSendMessage.RawMessageText = sendMessage;
                                 aiSendMessage.MessageText = sendMessage.ReplaceEscapeChars();
                                 aiSendMessage.MessageSender = MessageSender.User;
                                 aiSendMessage.MessageDate = reader.GetDateTime(11);
@@ -82,6 +83,7 @@ namespace PromptEngineering.Repository
                                 _logger.LogInformation($"Sender: {aiSendMessage.MessageSender} Output: {aiSendMessage.MessageText}");
                                 var aiReplyMessage = new ChatMessage();
                                 string replyMessage = reader.GetString(7);
+                                aiReplyMessage.RawMessageText = replyMessage;
                                 aiReplyMessage.MessageText = replyMessage.ReplaceEscapeChars();
                                 aiReplyMessage.MessageSender = MessageSender.Bot;
                                 aiReplyMessage.MessageDate = reader.GetDateTime(12);
@@ -147,7 +149,7 @@ namespace PromptEngineering.Repository
             var autoCompleteSuggestions = new List<string>();
             try
             {
-                var sql = @$"select prompt from chats where ai_model=(@ai_model) AND prompt like '%{query}%' group by prompt ;";
+                var sql = @$"select prompt from chats where message_key=(@ai_model) AND prompt like '%{query}%' group by prompt ;";
 
                 using (var connection = new NpgsqlConnection(_connectionString))
                 {
@@ -206,9 +208,9 @@ namespace PromptEngineering.Repository
         {
             _logger.LogInformation($"AddChatsAsync method");
 
-            var sql = @"INSERT INTO chats (message_id,conversation_id,llm,ai_model, prog_lang, phase,phase_optional,prompt,reference,result,status,attempt,success,requested_time,responded_time,input_tokens," +
-                "output_tokens,total_tokens,is_ai,user_name,role_name,prompt_engg_type,file_reference,file_name) VALUES(@message_id,@conversation_id,@llm,@ai_model, @prog_lang, @phase,@phase_optional,@prompt,@reference,@result," +
-                "@status,@attempt,@success,@requested_time,@responded_time,@input_tokens,@output_tokens,@total_tokens,@is_ai,@user_name,@role_name,@prompt_engg_type,@file_reference,@file_name) returning chat_id;";
+            var sql = @"INSERT INTO chats (llm,ai_model, prog_lang, phase,phase_optional,prompt,reference,result,status,attempt,success,requested_time,responded_time,input_tokens,output_tokens,total_tokens,is_ai,user_name," +
+                "role_name,prompt_engg_type,file_reference,file_name,conversation_id,message_key,prompt_message) VALUES(@llm,@ai_model, @prog_lang, @phase,@phase_optional,@prompt,@reference,@result,@status,@attempt,@success," +
+                "@requested_time,@responded_time,@input_tokens,@output_tokens,@total_tokens,@is_ai,@user_name,@role_name,@prompt_engg_type,@file_reference,@file_name,@conversation_id,@message_key,@prompt_message) returning chat_id;";
 
             try
             {
@@ -216,9 +218,7 @@ namespace PromptEngineering.Repository
                 {
                     connection.Open();
                     using (var command = new NpgsqlCommand(sql, connection))
-                    {
-                        command.Parameters.AddWithValue("@message_id", (string.IsNullOrEmpty(chats.MessageId) ? "" : chats.MessageId));
-                        command.Parameters.AddWithValue("@conversation_id", (string.IsNullOrEmpty(chats.ConversationId) ? "" : chats.ConversationId));
+                    {                        
                         command.Parameters.AddWithValue("@llm", chats.LLM);
                         command.Parameters.AddWithValue("@ai_model", chats.Model);
                         command.Parameters.AddWithValue("@prog_lang", chats.Language);
@@ -240,7 +240,10 @@ namespace PromptEngineering.Repository
                         command.Parameters.AddWithValue("@role_name", chats.SelectedRole);
                         command.Parameters.AddWithValue("@prompt_engg_type", chats.PromptEnggType);
                         command.Parameters.AddWithValue("@file_reference", chats.FileReference);
-                        command.Parameters.AddWithValue("@file_name", (string.IsNullOrEmpty(chats.FileName) ? "" : chats.Result));
+                        command.Parameters.AddWithValue("@file_name", (string.IsNullOrEmpty(chats.FileName) ? "" : chats.Result));                        
+                        command.Parameters.AddWithValue("@conversation_id", chats.ConversationId);
+                        command.Parameters.AddWithValue("@message_key", string.Concat(chats.LLM.Trim().ToLower(),"|",chats.Model.Trim().ToLower()));
+                        command.Parameters.AddWithValue("@prompt_message", (string.IsNullOrEmpty(chats.PromptMessage) ? "" : chats.PromptMessage));
                         int chatId = (int)command.ExecuteScalar();
                         _logger.LogInformation("The row has been inserted successfully.");
                         return chatId;
@@ -336,5 +339,40 @@ namespace PromptEngineering.Repository
             return (endpointUrl,apiToken);
         }
         #endregion
+
+
+        public List<ConversationDetailsModel> GetConversations(int conversationId)
+        {
+            _logger.LogInformation($"GetConversations method");
+            var conversations = new List<ConversationDetailsModel>();
+            try
+            {
+                var sql = @$"select chat_id,prompt_message,ai_response FROM public.get_conversations({conversationId});";
+
+                using (var connection = new NpgsqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    using (var command = new NpgsqlCommand(sql, connection))
+                    {
+                        using (var reader =  command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var conversation = new ConversationDetailsModel();
+                                conversation.ChatId = reader.GetInt32(0);
+                                conversation.PromptMessgae =reader.GetString(1);
+                                conversation.AiResponse = reader.GetString(2);
+                                conversations.Add(conversation);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error: {ex.Message}");
+            }
+            return conversations;
+        }
     }
 }

@@ -23,6 +23,7 @@ namespace PromptEngineering.Repository
         Task<string> GetChatMessage(ChatInput input);
 
         (string endpointUrl, string apiToken) GetAiEndpointUrl(string llm, string aiModel);
+        List<ConversationDetailsModel> GetConversations(int conversationId);
 
     }
 }

@@ -12,7 +12,7 @@
         public string CurrentUser { get; set; }
         public string SelectedUser { get; set; }
         public string SelectedRole { get; set; }
-        public string ConversationId { get; set; }
+        public int ConversationId { get; set; }
         public bool FileReference { get; set; } = false;
     }
 }
