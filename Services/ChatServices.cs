@@ -225,8 +225,14 @@ namespace PromptEngineering.Services
                 //{
                 //    GeminiCommand = $" {(repharse ? CLI.REPHRASE : string.Empty)} {CLI.SECURITY_FIX} \"{command} {(string.IsNullOrEmpty(referenceCode) ? string.Empty : "'" + referenceCode.ReplaceNewLineChars() + "'")}\"";
                 //}                
-                
-                if (!language.Equals("General", StringComparison.OrdinalIgnoreCase) && phase.Equals(CLIPhase.CODE, StringComparison.OrdinalIgnoreCase))
+
+                if (phase.Equals(CLIPhase.CONVERT, StringComparison.OrdinalIgnoreCase) && !string.IsNullOrEmpty(language) && !string.IsNullOrEmpty(phaseOptional))
+                {   
+                    string addCode = (string.IsNullOrEmpty(referenceCode) ? string.Empty : string.Format(Configurations.ADD_REFERENCE_CODE, referenceCode.ReplaceNewLineChars()));
+                    PromptCommand = $" {CLIPhase.CONVERT} {phaseOptional} into {language}, {command} {addCode} ";
+                    _logger.LogInformation($"CLI command with lang added {PromptCommand}");
+                }
+                else if (!language.Equals("General", StringComparison.OrdinalIgnoreCase) && phase.Equals(CLIPhase.CODE, StringComparison.OrdinalIgnoreCase))
                 {
                     string addLang = (command.Contains(language, StringComparison.OrdinalIgnoreCase) ? string.Empty : string.Format(Configurations.ADD_PROG_LANG, language));
                     string addCommand = (string.IsNullOrEmpty(command) ? string.Empty : string.Format(Configurations.ADD_GENERATE_CODE, command));

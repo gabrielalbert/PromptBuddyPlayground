@@ -58,6 +58,7 @@ namespace PromptEngineering.Models
         public const string SECURITY_FIX = "securityfix";
         public const string EXPLAIN = "";
         public const string OTHER = "other";
+        public const string CONVERT = "convert";
     }
 
     public static class PromptEnggType
