@@ -308,7 +308,7 @@ namespace PromptEngineering.Repository
             var endpointUrl = string.Empty;
             var apiToken = string.Empty;
             
-            string llm_key = llm.ToLower().Trim() + aiModel.ToLower().Trim();
+            string llm_key = string.Concat(llm.ToLower().Trim(),"|", aiModel.ToLower().Trim());
             try
             {
                 var sql = @$"select endpoint,api_token from ai_config where llm_key=@llm_key;";
