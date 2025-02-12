@@ -91,6 +91,23 @@ namespace PromptEngineering.Controllers
                 return NotFound();
             }
             return Ok(response);
+
         }
+
+        [HttpGet]
+        [Route("llm-models")]
+        [Produces("application/json")]
+        public IActionResult GetLlmModels()
+        {
+            _logger.LogInformation($"GetLlmModels request received at {DateTime.Now}");
+
+            var response = _masterServices.GetAiModels();
+            if (response == null)
+            {
+                return NotFound();
+            }
+            return Ok(response);
+        }
+
     }
 }

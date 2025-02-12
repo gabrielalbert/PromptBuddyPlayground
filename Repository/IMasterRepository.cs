@@ -10,7 +10,6 @@ namespace PromptEngineering.Repository
         List<PhaseModel> GetPhases();
         List<RoleModel> GetRoles();
         List<UserModel> GetUsers();
-
-
+        List<AiConfigModel> GetAiModels();
     }
 }

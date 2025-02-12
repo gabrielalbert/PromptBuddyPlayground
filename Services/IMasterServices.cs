@@ -10,5 +10,6 @@ namespace PromptEngineering.Services
         List<PhaseModel> GetPhases();
         List<RoleModel> GetRoles();
         List<UserModel> GetUsers();
+        List<AiConfigModel> GetAiModels();
     }
 }

@@ -192,5 +192,40 @@ namespace PromptEngineering.Repository
             }
             return users;
         }
+
+        public List<AiConfigModel> GetAiModels()
+        {
+            var aiConfigs = new List<AiConfigModel>();
+
+            try
+            {
+                var sql = @"select llm,model_name,endpoint from ai_config";
+                sql += " order by llm asc;";
+
+                using (var connection = new NpgsqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    using (var command = new NpgsqlCommand(sql, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var aiConfig = new AiConfigModel();
+                                aiConfig.LLM = (reader.IsDBNull(0) ? string.Empty : reader.GetString(0));
+                                aiConfig.ModelName = (reader.IsDBNull(1) ? string.Empty : reader.GetString(1));
+                                aiConfig.EndPoint= (reader.IsDBNull(2) ? string.Empty : reader.GetString(2));
+                                aiConfigs.Add(aiConfig);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error: {ex.Message}");
+            }
+            return aiConfigs;
+        }
     }
 }

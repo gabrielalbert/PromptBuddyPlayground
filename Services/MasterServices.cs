@@ -33,5 +33,9 @@ namespace PromptEngineering.Services
         {
             return _masterRepository.GetUsers();
         }
+        public List<AiConfigModel> GetAiModels()
+        {
+            return _masterRepository.GetAiModels();
+        }
     }
 }

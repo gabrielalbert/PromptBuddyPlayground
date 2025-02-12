@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using PromptEngineering.Models;
 using Npgsql;
 using System.Text;
+using System.Collections.Generic;
+using System.IO.Compression;
 
 namespace PromptEngineering.Services
 {
@@ -63,5 +65,30 @@ namespace PromptEngineering.Services
                 }
             }
         }
+
+        public async Task<List<FileDetails>> ExtractFiles(Stream fileStream, string zipFileName)
+        {
+            
+            string folderPath = $@"{_fileStoragePath}\{zipFileName}";
+            _logger.LogInformation($"folderPath {folderPath}");
+            
+            using var archieve = new ZipArchive(fileStream);
+            archieve.ExtractToDirectory(_fileStoragePath, true);
+
+            var files = Directory.GetFiles(folderPath, "*.*", SearchOption.AllDirectories);
+            var fileDetails = new List<FileDetails>();
+
+            foreach (var file in files)
+            {
+                fileDetails.Add(new FileDetails
+                {
+                    FileName = Path.GetFileName(file),
+                    FileFullPath = Path.GetFullPath(file),
+                    FileExtention=Path.GetExtension(file)
+                });
+            }
+            return fileDetails;
+        }
+
     }
 }
