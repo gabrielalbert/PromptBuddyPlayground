@@ -48,6 +48,8 @@ namespace PromptEngineering
             services.AddScoped<ICopilotCLIServices, CopilotCLIServices>();
             services.AddScoped<IRepoRepository, RepoRepository>();
             services.AddScoped<IRepoServices, RepoServices>();
+            services.AddScoped<IDocsRepository, DocsRepository>();
+            services.AddScoped<IDocsServices, DocsServices>();
             //services.AddScoped<IHuggingFaceServices, HuggingFaceServices>();
 
             // Register the HttpClientFactory

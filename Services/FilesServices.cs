@@ -90,5 +90,11 @@ namespace PromptEngineering.Services
             return fileDetails;
         }
 
+        public async Task<List<string>> ExtractFiles()
+        {
+            return  new List<string>(){".cs",".doc",".pdf",".docx",".cs",".json",".xml",".html",".css",".js",".ts" };
+        }
+        
+
     }
 }
