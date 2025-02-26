@@ -107,7 +107,7 @@ namespace PromptEngineering.Repository
                                 {
                                     RepoName = (reader.IsDBNull(0) ? string.Empty : reader.GetString(0)),
                                     FileCount = (reader.IsDBNull(1) ? 0 : reader.GetInt64(1)),
-                                    Indexed = (reader.IsDBNull(2) ? false : reader.GetBoolean(2))
+                                    Status = (reader.IsDBNull(2) ? string.Empty : reader.GetString(2))
                                 };
 
                                 repoSummaries.Add(repoSummary);

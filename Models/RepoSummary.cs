@@ -4,6 +4,6 @@
     {
         public string RepoName { get; set; }
         public long FileCount { get; set; }
-        public bool Indexed { get; set; }
+        public string Status { get; set; }
     }
 }
