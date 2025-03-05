@@ -70,7 +70,8 @@ namespace PromptEngineering.Repository
                             {
                                 string feedback=(reader.IsDBNull(16)?"":reader.GetString(16));
                                 var aiSendMessage = new ChatMessage();
-                                string sendMessage = @$"AI Model: {reader.GetString(0)}|{reader.GetString(1)}, Language: {reader.GetString(2)}, Phase: {reader.GetString(3)}, Prompt:{reader.GetString(5)}, Reference: {reader.GetString(6)}";
+                                string phaseOptional = (string.IsNullOrEmpty(reader.GetString(4)) ? "" : "/" + reader.GetString(4));
+                                string sendMessage = @$"#{reader.GetString(2)}@{reader.GetString(3)} {phaseOptional} {reader.GetString(5)} {reader.GetString(6)}";
                                 aiSendMessage.RawMessageText = sendMessage;
                                 aiSendMessage.MessageText = sendMessage.ReplaceEscapeChars();
                                 aiSendMessage.MessageSender = MessageSender.User;

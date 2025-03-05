@@ -29,6 +29,7 @@ namespace PromptEngineering.Models
         public bool FileReference { get; set; } = false;
         public string FileName { get; set; }
         public string PromptMessage { get; set; }
+        public string RepoName { get; set; }
 
     }
 }

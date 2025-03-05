@@ -13,6 +13,7 @@ using System.Runtime;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 using ChatMessage = PromptEngineering.Models.ChatMessage;
 
 namespace PromptEngineering.Services
@@ -146,6 +147,34 @@ namespace PromptEngineering.Services
             }
             return replyMessage;
         }
+        private async Task<string> RetrieveContextFromRepo(string reponame, string prompt)
+        {
+            HttpClient client = new HttpClient();
+            string apiUrl = _settings.RepoUrl;
+            try
+            {
+                var requestData = new
+                {
+                    collection_name = reponame,
+                    query_text = prompt,
+                    n_results = 5
+                };
+                string jsonData = JsonSerializer.Serialize(requestData);
+                StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(apiUrl, content);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                _logger.LogInformation($"Retrieved Context: {responseBody}");
+                var docs = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, object>>>(responseBody)["results"]["documents"];
+                string docsString = string.Join("\n", (JsonSerializer.Deserialize<string[][]>(docs.ToString()))[0]);
+                return prompt + "\n\nConsider the following context:\n" + docsString;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw;
+            }
+        }
 
         private async Task<Chats> Prompting(Chats message)
         {
@@ -153,6 +182,11 @@ namespace PromptEngineering.Services
             try
             {
                 string promptCommand = GetPromptCommand(message.Phase, message.Prompt, message.Reference, message.Language, message.PhaseOptional);
+                if (!(string.IsNullOrEmpty(message.RepoName) || (message.RepoName.ToLower() == "public")))
+                {
+                    string retrievedContext = await RetrieveContextFromRepo(message.RepoName, promptCommand);
+                    promptCommand = retrievedContext;
+                }
 
                 _logger.LogInformation($"Prompting Prompt Command: {promptCommand}");
                 RetriveFromAi(ref message, promptCommand);
@@ -272,8 +306,13 @@ namespace PromptEngineering.Services
                     PromptCommand = $" {CLIPhase.XMLDOCS} \"{addLang} {addCommand} {addCode} \"";
                     _logger.LogInformation($"CLI command with lang added {PromptCommand}");
                 }
+                else if (language.Equals("General", StringComparison.OrdinalIgnoreCase) && phase.Equals(CLIPhase.OTHER, StringComparison.OrdinalIgnoreCase))
+                {
+                    PromptCommand = command;
+                    _logger.LogInformation(command);
+                }
 
-                _logger.LogInformation($"CLI command framed {PromptCommand}");
+            _logger.LogInformation($"CLI command framed {PromptCommand}");
                 return PromptCommand;
 
             }

@@ -14,5 +14,6 @@
         public string SelectedRole { get; set; }
         public int ConversationId { get; set; }
         public bool FileReference { get; set; } = false;
+        public string RepoName { get; set; }
     }
 }
