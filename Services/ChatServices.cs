@@ -12,9 +12,11 @@ using System.Net.Http;
 using System.Runtime;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 using ChatMessage = PromptEngineering.Models.ChatMessage;
+
+
 
 namespace PromptEngineering.Services
 {
@@ -28,10 +30,11 @@ namespace PromptEngineering.Services
         private readonly MySettings _settings;
         private readonly ICopilotCLIServices _copilotCLIServices;
         private readonly IFilesServices _filesServices;
+        private readonly IOllamaServices _ollamaServices;
 
 
 
-        public ChatServices(ILogger<ChatServices> logger, IFilesServices filesServices, ICopilotCLIServices copilotCLIServices, IMapper mapper, IChatRepository chatRepository, IHttpClientFactory httpClientFactory, IOptions<MySettings> settings)
+        public ChatServices(ILogger<ChatServices> logger, IFilesServices filesServices, IOllamaServices ollamaServices, ICopilotCLIServices copilotCLIServices, IMapper mapper, IChatRepository chatRepository, IHttpClientFactory httpClientFactory, IOptions<MySettings> settings)
         {
             _logger = logger;
             _filesServices = filesServices;
@@ -39,6 +42,8 @@ namespace PromptEngineering.Services
             _mapper = mapper;
             _chatRepository = chatRepository;            
             _httpClient = httpClientFactory.CreateClient();
+            _ollamaServices = ollamaServices;
+            _settings = settings.Value;
         }
         
 
@@ -147,10 +152,11 @@ namespace PromptEngineering.Services
             }
             return replyMessage;
         }
+
         private async Task<string> RetrieveContextFromRepo(string reponame, string prompt)
         {
-            HttpClient client = new HttpClient();
-            string apiUrl = _settings.RepoUrl;
+            HttpClient client = new HttpClient(); 
+            string apiUrl = _settings.RepoUrl + "/query_text";
             try
             {
                 var requestData = new
@@ -181,9 +187,12 @@ namespace PromptEngineering.Services
 
             try
             {
+                _logger.LogInformation("Generating Prompt Command");
                 string promptCommand = GetPromptCommand(message.Phase, message.Prompt, message.Reference, message.Language, message.PhaseOptional);
+
                 if (!(string.IsNullOrEmpty(message.RepoName) || (message.RepoName.ToLower() == "public")))
                 {
+                    _logger.LogInformation("Retrieving Relevant context from Repo");
                     string retrievedContext = await RetrieveContextFromRepo(message.RepoName, promptCommand);
                     promptCommand = retrievedContext;
                 }
@@ -305,14 +314,13 @@ namespace PromptEngineering.Services
                     string addCode = (string.IsNullOrEmpty(referenceCode) ? string.Empty : string.Format(Configurations.ADD_REFERENCE_CODE, referenceCode.ReplaceNewLineChars()));
                     PromptCommand = $" {CLIPhase.XMLDOCS} \"{addLang} {addCommand} {addCode} \"";
                     _logger.LogInformation($"CLI command with lang added {PromptCommand}");
-                }
-                else if (language.Equals("General", StringComparison.OrdinalIgnoreCase) && phase.Equals(CLIPhase.OTHER, StringComparison.OrdinalIgnoreCase))
+                }else if (language.Equals("General", StringComparison.OrdinalIgnoreCase) && phase.Equals(CLIPhase.OTHER, StringComparison.OrdinalIgnoreCase))
                 {
                     PromptCommand = command;
                     _logger.LogInformation(command);
                 }
 
-            _logger.LogInformation($"CLI command framed {PromptCommand}");
+                    _logger.LogInformation($"CLI command framed {PromptCommand}");
                 return PromptCommand;
 
             }
@@ -347,40 +355,53 @@ namespace PromptEngineering.Services
 
         private void RetriveFromAi(ref Chats message,string command)
         {
-            var result = _chatRepository.GetAiEndpointUrl(message.LLM,message.Model);           
-
-            var credential = new System.ClientModel.ApiKeyCredential(result.apiToken);
-
-            var openAIOptions = new OpenAIClientOptions()
-            {
-                Endpoint = new System.Uri(result.endpointUrl)
-            };
-
-            var client = new ChatClient(message.Model, credential, openAIOptions);
-            
+            var result = _chatRepository.GetAiEndpointUrl(message.LLM,message.Model);
             try
             {
-                var messages = buildConversations(message.ConversationId);
-
-                messages.Add(new UserChatMessage(command));
-
-                var requestOptions = new ChatCompletionOptions()
+                if (message.LLM.ToLower()=="ollama")
                 {
-                };
+                    Microsoft.Extensions.AI.ChatResponse chatResponse = _ollamaServices.GetChatMessageFromLocalPhiAi(command, result.endpointUrl, message.ConversationId,message.Model).Result;
+                    message.Result = chatResponse.Text;//.Message.Text;
+                    message.RespondedTime = DateTime.Now;
+                    message.Status = "Completed";
 
-                var response = client.CompleteChat(messages, requestOptions);                
+                    message.Success = true;
+                    message.AI = true;
+                    message.Attempt = 1;
+                    message.InputTokens = (int)chatResponse.Usage.InputTokenCount;
+                    message.OutputTokens = (int)chatResponse.Usage.OutputTokenCount;
+                    message.TotalTokens = message.InputTokens + message.OutputTokens;
+                }
+                else
+                {
+                    var credential = new System.ClientModel.ApiKeyCredential(result.apiToken);
+                    var openAIOptions = new OpenAIClientOptions()
+                    {
+                        Endpoint = new System.Uri(result.endpointUrl)
+                    };
+                    var client = new ChatClient(message.Model, credential, openAIOptions);
+                
+                    var messages = buildConversations(message.ConversationId);
 
-                message.Result = response.Value.Content[0].Text;
-                message.RespondedTime = DateTime.Now;
-                message.Status = "Completed";
-                
-                message.Success = true;
-                message.AI = true;
-                message.Attempt = 1;
-                message.InputTokens = response.Value.Usage.InputTokenCount;
-                message.OutputTokens = response.Value.Usage.OutputTokenCount;
-                message.TotalTokens = message.InputTokens + message.OutputTokens;
-                
+                    messages.Add(new UserChatMessage(command));
+
+                    var requestOptions = new ChatCompletionOptions()
+                    {
+                    };
+
+                    var response = client.CompleteChat(messages, requestOptions);
+
+                    message.Result = response.Value.Content[0].Text;
+                    message.RespondedTime = DateTime.Now;
+                    message.Status = "Completed";
+
+                    message.Success = true;
+                    message.AI = true;
+                    message.Attempt = 1;
+                    message.InputTokens = response.Value.Usage.InputTokenCount;
+                    message.OutputTokens = response.Value.Usage.OutputTokenCount;
+                    message.TotalTokens = message.InputTokens + message.OutputTokens;
+                }
 
             }
             catch (Exception ex)
@@ -396,7 +417,8 @@ namespace PromptEngineering.Services
                 message.TotalTokens = 0;
 
             }
-            
+
+
         }
 
 

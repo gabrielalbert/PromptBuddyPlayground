@@ -50,6 +50,11 @@ namespace PromptEngineering
             services.AddScoped<IRepoServices, RepoServices>();
             services.AddScoped<IDocsRepository, DocsRepository>();
             services.AddScoped<IDocsServices, DocsServices>();
+            services.AddScoped<IOllamaServices, OllamaServices>();            
+            services.AddScoped<ILayoutRepository, LayoutRepository>();
+            services.AddScoped<ILayoutServices, LayoutServices>();
+            
+
             //services.AddScoped<IHuggingFaceServices, HuggingFaceServices>();
 
             // Register the HttpClientFactory

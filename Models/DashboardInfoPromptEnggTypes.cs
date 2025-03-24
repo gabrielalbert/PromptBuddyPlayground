@@ -5,5 +5,6 @@
         public string ZeroShot { get; set; }
         public string OneShot { get; set; }
         public string IterativeShot { get; set; }
+        public string ChainOfThoughtShot { get; set; }
     }
 }

@@ -70,8 +70,8 @@ namespace PromptEngineering.Repository
                             {
                                 string feedback=(reader.IsDBNull(16)?"":reader.GetString(16));
                                 var aiSendMessage = new ChatMessage();
-                                string phaseOptional = (string.IsNullOrEmpty(reader.GetString(4)) ? "" : "/" + reader.GetString(4));
-                                string sendMessage = @$"#{reader.GetString(2)}@{reader.GetString(3)} {phaseOptional} {reader.GetString(5)} {reader.GetString(6)}";
+                                string phaseOptional = (reader.GetString(3).ToLower()=="convert"? (string.IsNullOrEmpty(reader.GetString(4)) ? "" : "/" + reader.GetString(4)):"");
+                                string sendMessage = @$"#{reader.GetString(2)} @{reader.GetString(3)} {phaseOptional} {reader.GetString(5)} {reader.GetString(6)}";
                                 aiSendMessage.RawMessageText = sendMessage;
                                 aiSendMessage.MessageText = sendMessage.ReplaceEscapeChars();
                                 aiSendMessage.MessageSender = MessageSender.User;
@@ -114,7 +114,7 @@ namespace PromptEngineering.Repository
             var dashboardInfo = new DashboardInfoPromptEnggTypes();
             try
             {
-                var sql = @"select zeroShots,oneShots,iterativeShots FROM public.get_dashboard_data();";
+                var sql = @"select zeroShots,oneShots,iterativeShots,chainOfThoughtShots FROM public.get_dashboard_data();";
 
                 using (var connection = new NpgsqlConnection(_connectionString))
                 {
@@ -128,6 +128,7 @@ namespace PromptEngineering.Repository
                                 dashboardInfo.ZeroShot = Convert.ToString(reader.GetFieldValue<long>(0));
                                 dashboardInfo.OneShot = Convert.ToString(reader.GetFieldValue<long>(1));
                                 dashboardInfo.IterativeShot = Convert.ToString(reader.GetFieldValue<long>(2));
+                                dashboardInfo.ChainOfThoughtShot = Convert.ToString(reader.GetFieldValue<long>(3));
                                 _logger.LogInformation($"ZeroShot: {dashboardInfo.ZeroShot} OneShot: {dashboardInfo.OneShot} IterativeShot: {dashboardInfo.IterativeShot} ");
                             }
                         }
