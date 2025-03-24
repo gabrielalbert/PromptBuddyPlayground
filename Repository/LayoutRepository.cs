@@ -209,5 +209,43 @@ namespace PromptEngineering.Repository
                 _logger.LogError($"Error: {ex.Message}");
             }
         }
+
+
+        public (string endpointUrl, string apiToken) GetAiEndpointForImageToLayoutUrl()
+        {
+
+            var endpointUrl = string.Empty;
+            var apiToken = string.Empty;
+
+            string llm_key = "copilot|gpt-4o";
+            try
+            {
+                var sql = @$"select endpoint,api_token from ai_config where llm_key=@llm_key;";
+
+                using (var connection = new NpgsqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    using (var command = new NpgsqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@llm_key", llm_key);
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                endpointUrl = reader.GetString(0);
+                                apiToken = reader.GetString(1);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error: {ex.Message}");
+            }
+
+            return (endpointUrl, apiToken);
+        }
     }
 }

@@ -12,5 +12,6 @@ namespace PromptEngineering.Repository
 
         Task UpdateUiLayoutEntryStatus(int id,string status, string userName);
         Task UpdateResult(int id, string result, string userName);
+        (string endpointUrl, string apiToken) GetAiEndpointForImageToLayoutUrl();
     }
 }
