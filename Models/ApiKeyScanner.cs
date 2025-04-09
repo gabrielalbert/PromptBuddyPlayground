@@ -6,10 +6,23 @@ namespace PromptEngineering.Models
 {
 
     public static class ApiKeyScanner
+    {        
+        
+    // Add more patterns as needed
+    private static readonly List<Regex> ApiKeyPatterns = new()
     {
-        // Add more patterns as needed
-        private static readonly List<Regex> ApiKeyPatterns = new()
-    {
+        // CREDIT_CARD
+        new Regex(@"\b(?:\d[ -]*?){13,16}\b", RegexOptions.Compiled),
+
+        // EMAIL
+        new Regex(@"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b", RegexOptions.Compiled),
+
+        // PHONE
+        new Regex(@"\b(?:\+\d{1,2}\s?)?(?:\(\d{3}\)|\d{3})[-\s]?\d{3}[-\s]?\d{4}\b", RegexOptions.Compiled),
+
+        // SSN
+        new Regex(@"\b\d{3}-\d{2}-\d{4}\b", RegexOptions.Compiled),
+
         // Generic API Key (32+ alphanumeric)
         new Regex(@"\b[A-Za-z0-9]{32,}\b", RegexOptions.Compiled),
 

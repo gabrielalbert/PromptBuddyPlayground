@@ -390,7 +390,8 @@ namespace PromptEngineering.Services
                     };
                     
                     var redactedMessage = GetRedactedMessage(command);
-                    if (redactedMessage.Item1)
+
+                    if (message.PII && redactedMessage.Item1)
                     {
                         message.Result = redactedMessage.Item2;
                         message.RespondedTime = DateTime.Now;
@@ -447,7 +448,7 @@ namespace PromptEngineering.Services
             // Just check for presence
             if (ApiKeyScanner.ContainsApiKey(message))
             {
-                return (true ,"⚠️ API Key detected in the input. Blocking submission.");
+                return (true ,"⚠️ PII data detected in the input. Blocking submission. Please ensure all PII data is obfuscated");
             }
             else
             {

@@ -30,6 +30,7 @@ namespace PromptEngineering.Models
         public string FileName { get; set; }
         public string PromptMessage { get; set; }
         public string RepoName { get; set; }
+        public bool PII { get; set; } = false;
 
     }
 }
