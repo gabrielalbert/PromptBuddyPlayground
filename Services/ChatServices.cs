@@ -388,19 +388,39 @@ namespace PromptEngineering.Services
                     var requestOptions = new ChatCompletionOptions()
                     {
                     };
+                    
+                    var redactedMessage = GetRedactedMessage(command);
+                    if (redactedMessage.Item1)
+                    {
+                        message.Result = redactedMessage.Item2;
+                        message.RespondedTime = DateTime.Now;
+                        message.Status = "Completed";
 
-                    var response = client.CompleteChat(messages, requestOptions);
+                        message.Success = false;
+                        message.AI = true;
+                        message.Attempt = 1;
+                        message.InputTokens = 0;
+                        message.OutputTokens = 0;
+                        message.TotalTokens = 0;
 
-                    message.Result = response.Value.Content[0].Text;
-                    message.RespondedTime = DateTime.Now;
-                    message.Status = "Completed";
+                        return;
+                    }
+                    else
+                    {
+                        var response = client.CompleteChat(messages, requestOptions);
 
-                    message.Success = true;
-                    message.AI = true;
-                    message.Attempt = 1;
-                    message.InputTokens = response.Value.Usage.InputTokenCount;
-                    message.OutputTokens = response.Value.Usage.OutputTokenCount;
-                    message.TotalTokens = message.InputTokens + message.OutputTokens;
+                        message.Result = response.Value.Content[0].Text;
+                        message.RespondedTime = DateTime.Now;
+                        message.Status = "Completed";
+
+                        message.Success = true;
+                        message.AI = true;
+                        message.Attempt = 1;
+                        message.InputTokens = response.Value.Usage.InputTokenCount;
+                        message.OutputTokens = response.Value.Usage.OutputTokenCount;
+                        message.TotalTokens = message.InputTokens + message.OutputTokens;
+                    }
+                    
                 }
 
             }
@@ -421,6 +441,31 @@ namespace PromptEngineering.Services
 
         }
 
+        private (bool,string) GetRedactedMessage(string message)
+        {
+            
+            // Just check for presence
+            if (ApiKeyScanner.ContainsApiKey(message))
+            {
+                return (true ,"⚠️ API Key detected in the input. Blocking submission.");
+            }
+            else
+            {
+                return (false,message);
+            }
+            //var keys = ApiKeyScanner.ExtractApiKeys(message);
+            
+
+            //// Replace API keys with a placeholder
+            //string redactedMessage = message;
+
+            //foreach (var pattern in keys)
+            //{
+            //    redactedMessage = System.Text.RegularExpressions.Regex.Replace(redactedMessage, pattern, "[REDACTED]");
+            //}
+
+            //return redactedMessage;
+        }
 
     }
 }
