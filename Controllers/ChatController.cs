@@ -120,11 +120,11 @@ namespace PromptEngineering.Controllers
         [HttpGet]
         [Route("chat-groups")]
         [Produces("application/json")]
-        public async Task<IActionResult> GetRecentChats()
+        public async Task<IActionResult> GetRecentChats([FromHeader]int userId)
         {
             _logger.LogInformation($"GetRecentChats get request received at {DateTime.Now}");
 
-            var recentChats = await _chatServices.GetRecentChatsAsync();
+            var recentChats = await _chatServices.GetRecentChatsAsync(userId);
             if (recentChats == null)
             {
                 return NotFound();

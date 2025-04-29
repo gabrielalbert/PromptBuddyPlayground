@@ -17,7 +17,7 @@ namespace PromptEngineering.Services
 
         Task UpdateFeedback(int chatId, string feedback);        
         Task<ChatMessage> GetNewChatMessage(AiAssistantInput newInput);
-        Task<IEnumerable<ChatGroups>> GetRecentChatsAsync();
+        Task<IEnumerable<ChatGroups>> GetRecentChatsAsync(int userId);
         Task<IEnumerable<ChatMessage>> GetAllChatMessagesByGroupID(int groupId, string messageId, string startDate = "", string endDate = "");
 
     }

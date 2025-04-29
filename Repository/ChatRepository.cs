@@ -447,19 +447,20 @@ namespace PromptEngineering.Repository
         }
         #endregion
 
-        public async Task<IEnumerable<ChatGroups>> GetRecentChatsAsync()
+        public async Task<IEnumerable<ChatGroups>> GetRecentChatsAsync(int userId)
         {
             _logger.LogInformation($"GetRecentChatsAsync method");
             var chatGroups = new List<ChatGroups>();
             try
             {
-                var sql = @$"select ChatResult,GroupId,GroupName,RespondedTime FROM get_recent_chats();";
+                var sql = @$"select ChatResult,GroupId,GroupName,RespondedTime FROM get_recent_chats(@userId);";
 
                 using (var connection = new NpgsqlConnection(_connectionString))
                 {
                     connection.Open();
                     using (var command = new NpgsqlCommand(sql, connection))
                     {
+                        command.Parameters.AddWithValue("@userId", userId);
                         using (var reader = command.ExecuteReader())
                         {
                             while (reader.Read())
@@ -469,6 +470,8 @@ namespace PromptEngineering.Repository
                                 chatGroup.GroupId = reader.GetInt32(1);
                                 chatGroup.GroupName = reader.GetString(2);
                                 chatGroup.CreatedTime = reader.GetDateTime(3);
+                                chatGroup.LastUpdatedTime = reader.GetDateTime(3);
+                                chatGroup.TotalConversations = 0;
                                 chatGroups.Add(chatGroup);
                             }
                         }

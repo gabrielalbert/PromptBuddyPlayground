@@ -26,7 +26,7 @@ namespace PromptEngineering.Repository
         List<ConversationDetailsModel> GetConversations(int conversationId);
         int AddGroupName(int groupId, string groupChatName);
         string GetUserByID(int userId);
-        Task<IEnumerable<ChatGroups>> GetRecentChatsAsync();
+        Task<IEnumerable<ChatGroups>> GetRecentChatsAsync(int userId);
         Task<IEnumerable<ChatMessage>> GetAllChatMessagesByGroupIDAsync(int groupID, string messageId, string startDate = "", string endDate = "");
 
     }
