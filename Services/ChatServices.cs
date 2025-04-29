@@ -491,11 +491,14 @@ namespace PromptEngineering.Services
                 var promptInfo = PromptParser(newInput.Prompt);
                 var chatInput = _mapper.Map<ChatInput>(promptInfo);
                 string chatGroupName = DeriveChatGroupName(promptInfo);
-                chatInput.GroupId = _chatRepository.AddGroupName(newInput.GroupID, chatGroupName);
+                int groupId = _chatRepository.AddGroupName(newInput.GroupID, chatGroupName);
+                chatInput.GroupId = groupId;
                 var userName = _chatRepository.GetUserByID(newInput.UserId);
                 chatInput.CurrentUser = !string.IsNullOrEmpty(userName) ? userName : null;
                 chatInput.SelectedUser = !string.IsNullOrEmpty(userName) ? userName : null;
                 chatInput = _mapper.Map(newInput, chatInput); // Fill other values without overriding previous values
+                chatInput.GroupId = groupId;
+                chatInput.Prompt = promptInfo.Prompt;
                 return GetChatMessage(chatInput);
             }
             catch (Exception ex)
@@ -507,17 +510,38 @@ namespace PromptEngineering.Services
 
         private PromptInfo PromptParser(string inputPrompt)
         {
-            var regex = new Regex(@"#(?<lang>[\S]+)\s+@(?<phase>[\S]+)(?:\s+/(?<phaseOptional>[\S]+))?\s+(?<prompt>.+)", RegexOptions.IgnoreCase);
-            var match = regex.Match(inputPrompt);
+            //var regex = new Regex(@"#(?<lang>[\S]+)\s+@(?<phase>[\S]+)(?:\s+/(?<phaseOptional>[\S]+))?\s+(?<prompt>.+)", RegexOptions.IgnoreCase);
+            //var regex = new Regex(@"#(?<lang>\S+)\s+@(?<phase>\S+)\s+/(?<phaseOptional>\S+(?:\s+//(?<phaseOptional>\S+))?\s+(?<prompt>.+)", RegexOptions.IgnoreCase);
+            // Extract first occurrences
+            string language = GetFirstMatch(inputPrompt, @"#(\w+)");
+            string phase = GetFirstMatch(inputPrompt, @"@(\w+)");
+            string phaseOptional = GetFirstMatch(inputPrompt, @"/(\w+)");
 
-            if (!match.Success)
+            // Remove the first occurrence of each tag from the input string
+            string prompt = inputPrompt;
+
+            if (!string.IsNullOrEmpty(language))
+                prompt = ReplaceFirst(prompt, "#" + Regex.Escape(language));
+
+            if (!string.IsNullOrEmpty(phase))
+                prompt = ReplaceFirst(prompt, "@" + Regex.Escape(phase));
+
+            if (!string.IsNullOrEmpty(phaseOptional))
+                prompt = ReplaceFirst(prompt, "/" + Regex.Escape(phaseOptional));
+
+            // Clean up extra spaces
+            prompt = Regex.Replace(prompt, @"\s{2,}", " ").Trim();
+
+            //var match = regex.Match(inputPrompt);
+
+            if (string.IsNullOrEmpty(language)||string.IsNullOrEmpty(phase))
             {
                 throw new ArgumentException("Invalid prompt format. Required #language @phase and prompt ?prompt");
             }
-            var language = match.Groups["lang"].Value.Trim();
-            var phase = match.Groups["phase"].Value.Trim();
-            var phaseOptional = match.Groups["phaseOptional"].Success ? match.Groups["phaseOptional"].Value.Trim() : string.Empty;
-            var prompt = match.Groups["prompt"].Success ? match.Groups["prompt"].Value.Trim() : string.Empty;
+            //var language = match.Groups["lang"].Value.Trim();
+            //var phase = match.Groups["phase"].Value.Trim();
+            //var phaseOptional = match.Groups["phaseOptional"].Success ? match.Groups["phaseOptional"].Value.Trim() : string.Empty;
+            //var prompt = match.Groups["prompt"].Success ? match.Groups["prompt"].Value.Trim() : string.Empty;
             
 
 
@@ -540,6 +564,18 @@ namespace PromptEngineering.Services
                 Prompt = prompt,
                 PhaseOptional = phaseOptional
             };
+        }
+        private string GetFirstMatch(string input, string pattern)
+        {
+            var match = Regex.Match(input, pattern);
+            return match.Success ? match.Groups[1].Value : "";
+        }
+        private string ReplaceFirst(string input, string pattern)
+        {
+            var match = Regex.Match(input, pattern);
+            return match.Success
+                ? input.Remove(match.Index, match.Length)
+                : input;
         }
         private string DeriveChatGroupName(PromptInfo promptInfo)
         {
