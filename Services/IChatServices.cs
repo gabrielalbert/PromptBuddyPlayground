@@ -15,6 +15,10 @@ namespace PromptEngineering.Services
 
         Task<IEnumerable<string>> GetAutoCompleteSuggestions(string aiModel, string query);
 
-        Task UpdateFeedback(int chatId, string feedback);       
+        Task UpdateFeedback(int chatId, string feedback);        
+        Task<ChatMessage> GetNewChatMessage(AiAssistantInput newInput);
+        Task<IEnumerable<ChatGroups>> GetRecentChatsAsync();
+        Task<IEnumerable<ChatMessage>> GetAllChatMessagesByGroupID(int groupId, string messageId, string startDate = "", string endDate = "");
+
     }
 }

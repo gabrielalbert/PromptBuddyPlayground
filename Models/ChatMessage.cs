@@ -12,5 +12,6 @@ namespace PromptEngineering.Models
         public string PromptEnggType { get; set; }
         public string Feedback {get;set;}
         public string RawMessageText { get; set; }
+        public int GroupId { get; set; }
     }
 }

@@ -13,6 +13,7 @@ using System.Runtime;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using ChatMessage = PromptEngineering.Models.ChatMessage;
 
@@ -104,6 +105,7 @@ namespace PromptEngineering.Services
                     replyMessage.MessageId = chatId;
                     replyMessage.PromptEnggType = "AvailableResult";
                     replyMessage.Feedback = string.Empty;
+                    replyMessage.GroupId = chats.GroupId;
                 }
                 else
                 {
@@ -133,6 +135,7 @@ namespace PromptEngineering.Services
                     _logger.LogInformation($"Command executed successfully with output: {chats.Result}");
                     replyMessage.ChatId = chatId;
                     replyMessage.MessageId = chatId;
+                    replyMessage.GroupId = chats.GroupId;
 
                     _logger.LogInformation($"GetPromptMessage with output: {result}");
                 }
@@ -388,40 +391,53 @@ namespace PromptEngineering.Services
                     var requestOptions = new ChatCompletionOptions()
                     {
                     };
-                    
-                    var redactedMessage = GetRedactedMessage(command);
 
-                    if (message.PII && redactedMessage.Item1)
-                    {
-                        message.Result = redactedMessage.Item2;
-                        message.RespondedTime = DateTime.Now;
-                        message.Status = "Completed";
+                    var response = client.CompleteChat(messages, requestOptions);
 
-                        message.Success = false;
-                        message.AI = true;
-                        message.Attempt = 1;
-                        message.InputTokens = 0;
-                        message.OutputTokens = 0;
-                        message.TotalTokens = 0;
+                    message.Result = response.Value.Content[0].Text;
+                    message.RespondedTime = DateTime.Now;
+                    message.Status = "Completed";
 
-                        return;
-                    }
-                    else
-                    {
-                        var response = client.CompleteChat(messages, requestOptions);
+                    message.Success = true;
+                    message.AI = true;
+                    message.Attempt = 1;
+                    message.InputTokens = response.Value.Usage.InputTokenCount;
+                    message.OutputTokens = response.Value.Usage.OutputTokenCount;
+                    message.TotalTokens = message.InputTokens + message.OutputTokens;
 
-                        message.Result = response.Value.Content[0].Text;
-                        message.RespondedTime = DateTime.Now;
-                        message.Status = "Completed";
+                    //var redactedMessage = GetRedactedMessage(command);
 
-                        message.Success = true;
-                        message.AI = true;
-                        message.Attempt = 1;
-                        message.InputTokens = response.Value.Usage.InputTokenCount;
-                        message.OutputTokens = response.Value.Usage.OutputTokenCount;
-                        message.TotalTokens = message.InputTokens + message.OutputTokens;
-                    }
-                    
+                    //if (message.PII && redactedMessage.Item1)
+                    //{
+                    //    message.Result = redactedMessage.Item2;
+                    //    message.RespondedTime = DateTime.Now;
+                    //    message.Status = "Completed";
+
+                    //    message.Success = false;
+                    //    message.AI = true;
+                    //    message.Attempt = 1;
+                    //    message.InputTokens = 0;
+                    //    message.OutputTokens = 0;
+                    //    message.TotalTokens = 0;
+
+                    //    return;
+                    //}
+                    //else
+                    //{
+                    //    var response = client.CompleteChat(messages, requestOptions);
+
+                    //    message.Result = response.Value.Content[0].Text;
+                    //    message.RespondedTime = DateTime.Now;
+                    //    message.Status = "Completed";
+
+                    //    message.Success = true;
+                    //    message.AI = true;
+                    //    message.Attempt = 1;
+                    //    message.InputTokens = response.Value.Usage.InputTokenCount;
+                    //    message.OutputTokens = response.Value.Usage.OutputTokenCount;
+                    //    message.TotalTokens = message.InputTokens + message.OutputTokens;
+                    //}
+
                 }
 
             }
@@ -466,6 +482,95 @@ namespace PromptEngineering.Services
             //}
 
             //return redactedMessage;
+        }
+
+        public Task<ChatMessage> GetNewChatMessage(AiAssistantInput newInput)
+        {
+            try
+            {
+                var promptInfo = PromptParser(newInput.Prompt);
+                var chatInput = _mapper.Map<ChatInput>(promptInfo);
+                string chatGroupName = DeriveChatGroupName(promptInfo);
+                chatInput.GroupId = _chatRepository.AddGroupName(newInput.GroupID, chatGroupName);
+                var userName = _chatRepository.GetUserByID(newInput.UserId);
+                chatInput.CurrentUser = !string.IsNullOrEmpty(userName) ? userName : null;
+                chatInput.SelectedUser = !string.IsNullOrEmpty(userName) ? userName : null;
+                chatInput = _mapper.Map(newInput, chatInput); // Fill other values without overriding previous values
+                return GetChatMessage(chatInput);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw ex;
+            }
+        }
+
+        private PromptInfo PromptParser(string inputPrompt)
+        {
+            var regex = new Regex(@"#(?<lang>[\S]+)\s+@(?<phase>[\S]+)(?:\s+/(?<phaseOptional>[\S]+))?\s+(?<prompt>.+)", RegexOptions.IgnoreCase);
+            var match = regex.Match(inputPrompt);
+
+            if (!match.Success)
+            {
+                throw new ArgumentException("Invalid prompt format. Required #language @phase and prompt ?prompt");
+            }
+            var language = match.Groups["lang"].Value.Trim();
+            var phase = match.Groups["phase"].Value.Trim();
+            var phaseOptional = match.Groups["phaseOptional"].Success ? match.Groups["phaseOptional"].Value.Trim() : string.Empty;
+            var prompt = match.Groups["prompt"].Success ? match.Groups["prompt"].Value.Trim() : string.Empty;
+            
+
+
+            if (phase.Equals("convert", StringComparison.OrdinalIgnoreCase) &&
+            string.IsNullOrWhiteSpace(phaseOptional))
+            {
+                throw new ArgumentException("For phase 'convert', phase Optional after '/' is required.");
+            }
+
+            if ((language.Equals("other", StringComparison.OrdinalIgnoreCase) ||
+            phase.Equals("other", StringComparison.OrdinalIgnoreCase)) && string.IsNullOrWhiteSpace(phaseOptional))
+            {
+                throw new ArgumentException("Prompt is required when language or phase is other");
+            }
+
+            return new PromptInfo
+            {
+                Language = language,
+                Phase = phase,
+                Prompt = prompt,
+                PhaseOptional = phaseOptional
+            };
+        }
+        private string DeriveChatGroupName(PromptInfo promptInfo)
+        {
+            _logger.LogInformation($"DeriveChatGroupName method started at {DateTime.Now}");
+            _logger.LogInformation($"DeriveChatGroupName method Input {promptInfo.Language} {promptInfo.Phase} {promptInfo.Prompt} {promptInfo.PhaseOptional}");
+            try
+            {
+                string chatGroupName = string.Empty;
+                string inputLanguage = (string.IsNullOrEmpty(promptInfo.Language) ? string.Empty : promptInfo.Language);
+                string inputPhase = (string.IsNullOrEmpty(promptInfo.Phase) ? string.Empty : promptInfo.Phase);
+                string inputPrompt = (string.IsNullOrEmpty(promptInfo.Prompt) ? string.Empty : promptInfo.Prompt);
+                string inputPhaseOptional = (string.IsNullOrEmpty(promptInfo.PhaseOptional) ? string.Empty : promptInfo.PhaseOptional);
+
+                chatGroupName = $" {inputLanguage} {inputPhase} {inputPrompt} {inputPhaseOptional} ";
+                _logger.LogInformation($"CLI command with lang added {chatGroupName}");
+                return chatGroupName;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw ex;
+            }
+        }
+        public async Task<IEnumerable<ChatGroups>> GetRecentChatsAsync()
+        {
+            return await _chatRepository.GetRecentChatsAsync();
+        }
+
+        public async Task<IEnumerable<ChatMessage>> GetAllChatMessagesByGroupID(int groupId, string messageId, string startDate = "", string endDate = "")
+        {
+            return await _chatRepository.GetAllChatMessagesByGroupIDAsync(groupId, messageId, startDate, endDate);
         }
 
     }

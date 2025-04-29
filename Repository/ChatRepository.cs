@@ -211,8 +211,8 @@ namespace PromptEngineering.Repository
             _logger.LogInformation($"AddChatsAsync method");
 
             var sql = @"INSERT INTO chats (llm,ai_model, prog_lang, phase,phase_optional,prompt,reference,result,status,attempt,success,requested_time,responded_time,input_tokens,output_tokens,total_tokens,is_ai,user_name," +
-                "role_name,prompt_engg_type,file_reference,file_name,conversation_id,message_key,prompt_message) VALUES(@llm,@ai_model, @prog_lang, @phase,@phase_optional,@prompt,@reference,@result,@status,@attempt,@success," +
-                "@requested_time,@responded_time,@input_tokens,@output_tokens,@total_tokens,@is_ai,@user_name,@role_name,@prompt_engg_type,@file_reference,@file_name,@conversation_id,@message_key,@prompt_message) returning chat_id;";
+                "role_name,prompt_engg_type,file_reference,file_name,conversation_id,message_key,prompt_message,group_id) VALUES(@llm,@ai_model, @prog_lang, @phase,@phase_optional,@prompt,@reference,@result,@status,@attempt,@success," +
+                "@requested_time,@responded_time,@input_tokens,@output_tokens,@total_tokens,@is_ai,@user_name,@role_name,@prompt_engg_type,@file_reference,@file_name,@conversation_id,@message_key,@prompt_message,@group_id) returning chat_id;";
 
             try
             {
@@ -246,6 +246,7 @@ namespace PromptEngineering.Repository
                         command.Parameters.AddWithValue("@conversation_id", chats.ConversationId);
                         command.Parameters.AddWithValue("@message_key", string.Concat(chats.LLM.Trim().ToLower(),"|",chats.Model.Trim().ToLower()));
                         command.Parameters.AddWithValue("@prompt_message", (string.IsNullOrEmpty(chats.PromptMessage) ? "" : chats.PromptMessage));
+                        command.Parameters.AddWithValue("@group_id", chats.GroupId > 0 ? chats.GroupId : -1);
                         int chatId = (int)command.ExecuteScalar();
                         _logger.LogInformation("The row has been inserted successfully.");
                         return chatId;
@@ -376,5 +377,195 @@ namespace PromptEngineering.Repository
             }
             return conversations;
         }
+
+
+        #region ChatGroupName
+
+        public int AddGroupName(int groupId, string chatGroupName)
+        {
+            _logger.LogInformation($"AddGroupName method");
+
+            var sql = @"SELECT insert_group_by_id(@p_group_id,@p_groupname)";
+
+            try
+            {
+                using (var connection = new NpgsqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    using (var command = new NpgsqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@p_group_id", groupId);
+                        command.Parameters.AddWithValue("@p_groupname", chatGroupName);
+                        int chatGroupId = (int)command.ExecuteScalar();
+                        _logger.LogInformation("The row has been inserted successfully.");
+                        return chatGroupId;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error: {ex.Message}");
+            }
+            return -1;
+        }
+
+        #endregion
+
+        #region GetUserByID
+        public string GetUserByID(int userId)
+        {
+            _logger.LogInformation($"GetUserByID method Input {userId}");
+            string userName = String.Empty;
+            try
+            {
+                var sql = @$"select * from getuserbyid(@userId);";
+
+                using (var connection = new NpgsqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    using (var command = new NpgsqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@userid", userId);
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                userName = reader["user_name"].ToString();
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error: {ex.Message}");
+            }
+
+            return userName;
+
+        }
+        #endregion
+
+        public async Task<IEnumerable<ChatGroups>> GetRecentChatsAsync()
+        {
+            _logger.LogInformation($"GetRecentChatsAsync method");
+            var chatGroups = new List<ChatGroups>();
+            try
+            {
+                var sql = @$"select ChatResult,GroupId,GroupName,RespondedTime FROM get_recent_chats();";
+
+                using (var connection = new NpgsqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    using (var command = new NpgsqlCommand(sql, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var chatGroup = new ChatGroups();
+                                chatGroup.GroupDescription = reader.GetString(0);
+                                chatGroup.GroupId = reader.GetInt32(1);
+                                chatGroup.GroupName = reader.GetString(2);
+                                chatGroup.CreatedTime = reader.GetDateTime(3);
+                                chatGroups.Add(chatGroup);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error: {ex.Message}");
+            }
+            return chatGroups;
+        }
+
+
+        #region GetAllChatMessagesByGroupID
+        public async Task<IEnumerable<ChatMessage>> GetAllChatMessagesByGroupIDAsync(int groupId, string messageId, string startDate = "", string endDate = "")
+        {
+            _logger.LogInformation($"GetAllChatMessagesByGroupID method Input {groupId} {messageId} {startDate} {endDate}");
+            var chatMessages = new List<ChatMessage>();
+            try
+            {
+                var sql = @"select llm,ai_model,prog_lang, phase,phase_optional,prompt,reference,result,status,attempt,success,requested_time,responded_time,user_name,prompt_engg_type,chat_id,feedback,group_id from  chats where  group_id=@group_id";
+
+                if ((!string.IsNullOrEmpty(startDate) && string.IsNullOrEmpty(endDate)) || (!string.IsNullOrEmpty(startDate) && string.Equals(startDate, endDate, StringComparison.OrdinalIgnoreCase)))
+                {
+                    sql += " and cast(requested_time as date)=cast(@requested_time as date)";
+                }
+                else if (!string.IsNullOrEmpty(startDate) && !string.IsNullOrEmpty(endDate))
+                {
+                    sql += " AND cast(requested_time as date) BETWEEN cast(@start_date as date) AND cast(@end_date  as date)";
+
+                }
+                sql += " order by chat_id asc;";
+                _logger.LogInformation($"GetAllChatMessagesByGroupID Query {sql} ");
+
+                using (var connection = new NpgsqlConnection(_connectionString))
+                {
+                    await connection.OpenAsync();
+                    using (var command = new NpgsqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@group_id", groupId);
+                        // command.Parameters.AddWithValue("@message_key", messageId);
+
+                        if ((!string.IsNullOrEmpty(startDate) && string.IsNullOrEmpty(endDate)) || (!string.IsNullOrEmpty(startDate) && string.Equals(startDate, endDate, StringComparison.OrdinalIgnoreCase)))
+                        {
+                            command.Parameters.AddWithValue("@requested_time", DateTime.Parse(startDate).ToString("yyyy-MM-dd"));
+                        }
+                        else if (!string.IsNullOrEmpty(startDate) && !string.IsNullOrEmpty(endDate))
+                        {
+                            command.Parameters.AddWithValue("@start_date", DateTime.Parse(startDate).ToString("yyyy-MM-dd"));
+                            command.Parameters.AddWithValue("@end_date", DateTime.Parse(endDate).ToString("yyyy-MM-dd"));
+                        }
+
+                        using (var reader = await command.ExecuteReaderAsync())
+                        {
+                            int index = 1;
+                            while (await reader.ReadAsync())
+                            {
+                                string feedback = (reader.IsDBNull(16) ? "" : reader.GetString(16));
+                                var aiSendMessage = new ChatMessage();
+                                string phaseOptional = (reader.GetString(3).ToLower() == "convert" ? (string.IsNullOrEmpty(reader.GetString(4)) ? "" : "/" + reader.GetString(4)) : "");
+                                string sendMessage = @$"#{reader.GetString(2)} @{reader.GetString(3)} {phaseOptional} {reader.GetString(5)} {reader.GetString(6)}";
+                                aiSendMessage.RawMessageText = sendMessage;
+                                aiSendMessage.MessageText = sendMessage.ReplaceEscapeChars();
+                                aiSendMessage.MessageSender = MessageSender.User;
+                                aiSendMessage.MessageDate = reader.GetDateTime(11);
+                                aiSendMessage.PromptEnggType = reader.GetString(14);
+                                aiSendMessage.MessageId = index++;
+                                aiSendMessage.ChatId = reader.GetInt32(15);
+                                aiSendMessage.Feedback = (string.IsNullOrEmpty(feedback) ? "" : feedback);
+                                aiSendMessage.GroupId = reader.GetInt32(17);
+                                chatMessages.Add(aiSendMessage);
+                                _logger.LogInformation($"Sender: {aiSendMessage.MessageSender} Output: {aiSendMessage.MessageText}");
+                                var aiReplyMessage = new ChatMessage();
+                                string replyMessage = reader.GetString(7);
+                                aiReplyMessage.RawMessageText = replyMessage;
+                                aiReplyMessage.MessageText = replyMessage.ReplaceEscapeChars();
+                                aiReplyMessage.MessageSender = MessageSender.Bot;
+                                aiReplyMessage.MessageDate = reader.GetDateTime(12);
+                                aiReplyMessage.PromptEnggType = reader.GetString(14);
+                                aiReplyMessage.MessageId = index++;
+                                aiReplyMessage.ChatId = reader.GetInt32(15);
+                                aiReplyMessage.Feedback = (string.IsNullOrEmpty(feedback) ? "" : feedback);
+                                aiReplyMessage.GroupId = reader.GetInt32(17);
+                                chatMessages.Add(aiReplyMessage);
+                                _logger.LogInformation($"Sender: {aiReplyMessage.MessageSender} Output: {aiReplyMessage.MessageText}");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error: {ex.Message}");
+            }
+            return chatMessages;
+        }
+        #endregion
     }
 }

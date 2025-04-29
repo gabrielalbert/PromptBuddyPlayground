@@ -15,6 +15,6 @@
         public int ConversationId { get; set; }
         public bool FileReference { get; set; } = false;
         public string RepoName { get; set; }
-        public bool PII { get; set; } = false;
+        public int GroupId { get; set; }
     }
 }

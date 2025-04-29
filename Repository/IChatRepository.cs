@@ -24,6 +24,10 @@ namespace PromptEngineering.Repository
 
         (string endpointUrl, string apiToken) GetAiEndpointUrl(string llm, string aiModel);
         List<ConversationDetailsModel> GetConversations(int conversationId);
+        int AddGroupName(int groupId, string groupChatName);
+        string GetUserByID(int userId);
+        Task<IEnumerable<ChatGroups>> GetRecentChatsAsync();
+        Task<IEnumerable<ChatMessage>> GetAllChatMessagesByGroupIDAsync(int groupID, string messageId, string startDate = "", string endDate = "");
 
     }
 }

@@ -101,5 +101,53 @@ namespace PromptEngineering.Controllers
             return Ok();
         }
 
+        [HttpPost]
+        [Route("ai-assistant")]
+        [Produces("application/json")]
+        public async Task<IActionResult> GetChatMessageUpdated([FromBody] AiAssistantInput newInput)
+        {
+            _logger.LogInformation($"GetChatMessageUpdated request received at {DateTime.Now}");
+            _logger.LogInformation("GetChatMessageUpdated request Inputs at {0}", JsonSerializer.Serialize(newInput));
+
+            var response = await _chatServices.GetNewChatMessage(newInput);
+            if (response == null)
+            {
+                return NotFound();
+            }
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [Route("chat-groups")]
+        [Produces("application/json")]
+        public async Task<IActionResult> GetRecentChats()
+        {
+            _logger.LogInformation($"GetRecentChats get request received at {DateTime.Now}");
+
+            var recentChats = await _chatServices.GetRecentChatsAsync();
+            if (recentChats == null)
+            {
+                return NotFound();
+            }
+            return Ok(recentChats);
+        }
+
+        [HttpGet]
+        [Route("{groupId}/chat-messages")]
+        [Produces("application/json")]
+        public async Task<IActionResult> GetChatMessagesByGroupID([FromRoute] int groupId, [FromHeader] string startDate = "", [FromHeader] string endDate = "", [FromHeader] string aiModel = "")
+        {
+            _logger.LogInformation($"GetChatMessagesByGroupID Get request received at {DateTime.Now}");
+            _logger.LogInformation($"GetChatMessagesByGroupID Controller Input {groupId} {startDate} {endDate} {aiModel}");
+
+            var chatMessages = await _chatServices.GetAllChatMessagesByGroupID(groupId, aiModel, startDate, endDate);
+            if (chatMessages == null)
+            {
+                return NotFound();
+            }
+            return Ok(chatMessages);
+        }
+
+
     }
 }
