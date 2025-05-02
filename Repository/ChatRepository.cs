@@ -487,23 +487,14 @@ namespace PromptEngineering.Repository
 
 
         #region GetAllChatMessagesByGroupID
-        public async Task<IEnumerable<ChatMessage>> GetAllChatMessagesByGroupIDAsync(int groupId, string messageId, string startDate = "", string endDate = "")
+        public async Task<IEnumerable<ChatMessage>> GetAllChatMessagesByGroupIDAsync(int groupId)
         {
-            _logger.LogInformation($"GetAllChatMessagesByGroupID method Input {groupId} {messageId} {startDate} {endDate}");
+            _logger.LogInformation($"GetAllChatMessagesByGroupID method Input {groupId}");
             var chatMessages = new List<ChatMessage>();
             try
             {
                 var sql = @"select llm,ai_model,prog_lang, phase,phase_optional,prompt,reference,result,status,attempt,success,requested_time,responded_time,user_name,prompt_engg_type,chat_id,feedback,group_id from  chats where  group_id=@group_id";
-
-                if ((!string.IsNullOrEmpty(startDate) && string.IsNullOrEmpty(endDate)) || (!string.IsNullOrEmpty(startDate) && string.Equals(startDate, endDate, StringComparison.OrdinalIgnoreCase)))
-                {
-                    sql += " and cast(requested_time as date)=cast(@requested_time as date)";
-                }
-                else if (!string.IsNullOrEmpty(startDate) && !string.IsNullOrEmpty(endDate))
-                {
-                    sql += " AND cast(requested_time as date) BETWEEN cast(@start_date as date) AND cast(@end_date  as date)";
-
-                }
+                               
                 sql += " order by chat_id asc;";
                 _logger.LogInformation($"GetAllChatMessagesByGroupID Query {sql} ");
 
@@ -513,17 +504,7 @@ namespace PromptEngineering.Repository
                     using (var command = new NpgsqlCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@group_id", groupId);
-                        // command.Parameters.AddWithValue("@message_key", messageId);
-
-                        if ((!string.IsNullOrEmpty(startDate) && string.IsNullOrEmpty(endDate)) || (!string.IsNullOrEmpty(startDate) && string.Equals(startDate, endDate, StringComparison.OrdinalIgnoreCase)))
-                        {
-                            command.Parameters.AddWithValue("@requested_time", DateTime.Parse(startDate).ToString("yyyy-MM-dd"));
-                        }
-                        else if (!string.IsNullOrEmpty(startDate) && !string.IsNullOrEmpty(endDate))
-                        {
-                            command.Parameters.AddWithValue("@start_date", DateTime.Parse(startDate).ToString("yyyy-MM-dd"));
-                            command.Parameters.AddWithValue("@end_date", DateTime.Parse(endDate).ToString("yyyy-MM-dd"));
-                        }
+                        // command.Parameters.AddWithValue("@message_key", messageId);                       
 
                         using (var reader = await command.ExecuteReaderAsync())
                         {

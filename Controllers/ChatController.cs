@@ -135,12 +135,12 @@ namespace PromptEngineering.Controllers
         [HttpGet]
         [Route("{groupId}/chat-messages")]
         [Produces("application/json")]
-        public async Task<IActionResult> GetChatMessagesByGroupID([FromRoute] int groupId, [FromHeader] string startDate = "", [FromHeader] string endDate = "", [FromHeader] string aiModel = "")
+        public async Task<IActionResult> GetChatMessagesByGroupID([FromRoute] int groupId)
         {
             _logger.LogInformation($"GetChatMessagesByGroupID Get request received at {DateTime.Now}");
-            _logger.LogInformation($"GetChatMessagesByGroupID Controller Input {groupId} {startDate} {endDate} {aiModel}");
+            _logger.LogInformation($"GetChatMessagesByGroupID Controller Input {groupId}");
 
-            var chatMessages = await _chatServices.GetAllChatMessagesByGroupID(groupId, aiModel, startDate, endDate);
+            var chatMessages = await _chatServices.GetAllChatMessagesByGroupID(groupId);
             if (chatMessages == null)
             {
                 return NotFound();

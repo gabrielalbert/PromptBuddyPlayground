@@ -604,9 +604,9 @@ namespace PromptEngineering.Services
             return await _chatRepository.GetRecentChatsAsync(userId);
         }
 
-        public async Task<IEnumerable<ChatMessage>> GetAllChatMessagesByGroupID(int groupId, string messageId, string startDate = "", string endDate = "")
+        public async Task<IEnumerable<ChatMessage>> GetAllChatMessagesByGroupID(int groupId)
         {
-            return await _chatRepository.GetAllChatMessagesByGroupIDAsync(groupId, messageId, startDate, endDate);
+            return await _chatRepository.GetAllChatMessagesByGroupIDAsync(groupId);
         }
 
     }
