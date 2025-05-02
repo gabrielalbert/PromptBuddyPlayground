@@ -53,7 +53,9 @@ namespace PromptEngineering
             services.AddScoped<IOllamaServices, OllamaServices>();            
             services.AddScoped<ILayoutRepository, LayoutRepository>();
             services.AddScoped<ILayoutServices, LayoutServices>();
-            
+            services.AddScoped<IGuardrailsRepository, GuardrailsRepository>();
+            services.AddScoped<IGuardrailsServices, GuardrailsServices>();
+
 
             //services.AddScoped<IHuggingFaceServices, HuggingFaceServices>();
 
