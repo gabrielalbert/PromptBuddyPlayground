@@ -151,10 +151,7 @@ namespace PromptEngineering.Services
             {
                 var layoutData =  await _layoutRepository.GetUiLayoutDatas(layoutId);
 
-                //for public deployement
-                var result = _layoutRepository.GetAiEndpointForImageToLayoutUrl();
-
-                var credential = new System.ClientModel.ApiKeyCredential(result.apiToken);
+                var credential = new System.ClientModel.ApiKeyCredential(_settings.ImageApiKey);
 
                 var openAIOptions = new OpenAIClientOptions()
                 {

@@ -95,7 +95,7 @@ namespace PromptEngineering.Services
                     chats.InputTokens = 0;
                     chats.OutputTokens = 0;
                     chats.TotalTokens = 0;
-                    chats.AI=false;
+                    chats.AI = false;
                     chats.PromptEnggType = "AvailableResult";
                     chatId = _chatRepository.AddChats(chats);
                     replyMessage.ChatId = chatId;
@@ -113,7 +113,7 @@ namespace PromptEngineering.Services
                     {
                         chats = await _copilotCLIServices.ExecuteCopilotCommand(chats, false);
                     }
-                    else 
+                    else
                     {
                         chats = await Prompting(chats);
                         if (chats.ConversationId > 0)
@@ -176,7 +176,7 @@ namespace PromptEngineering.Services
                 _logger.LogInformation($"Retrieved Context: {responseBody}");
                 var docs = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, object>>>(responseBody)["results"]["documents"];
                 string docsString = string.Join("\n", (JsonSerializer.Deserialize<string[][]>(docs.ToString()))[0]);
-                return prompt + "\n\nConsider the following context:\n" + docsString;
+                return prompt + "\n\nConsider the following context:\n" + docsString + "\n\n\nAnalyse the code and suggest code changes to resolve memory leak issues.";
             }
             catch (Exception ex)
             {
@@ -297,7 +297,7 @@ namespace PromptEngineering.Services
                 else if (!language.Equals("General", StringComparison.OrdinalIgnoreCase) && phase.Equals(CLIPhase.BUG_FIX, StringComparison.OrdinalIgnoreCase))
                 {
                     string addLang = (command.Contains(language, StringComparison.OrdinalIgnoreCase) ? string.Empty : string.Format(Configurations.ADD_PROG_LANG, language));
-                    string addCommand = (string.IsNullOrEmpty(command) ? Configurations.ADD_DEFAULT_UNIT_TEST : string.Format(Configurations.ADD_GENERATE_CODE, command));
+                    string addCommand = (string.IsNullOrEmpty(command) ? Configurations.ADD_DEFAULT_BUGFIX : string.Format(Configurations.ADD_GENERATE_CODE, command));
                     string addCode = (string.IsNullOrEmpty(referenceCode) ? string.Empty : string.Format(Configurations.ADD_REFERENCE_CODE, referenceCode.ReplaceNewLineChars()));
                     PromptCommand = $" {CLIPhase.BUG_FIX} \"{addLang} {addCommand} {addCode} \"";
                     _logger.LogInformation($"CLI command with lang added {PromptCommand}");
@@ -305,7 +305,7 @@ namespace PromptEngineering.Services
                 else if (!language.Equals("General", StringComparison.OrdinalIgnoreCase) && phase.Equals(CLIPhase.DOCS, StringComparison.OrdinalIgnoreCase))
                 {
                     string addLang = (command.Contains(language, StringComparison.OrdinalIgnoreCase) ? string.Empty : string.Format(Configurations.ADD_PROG_LANG, language));
-                    string addCommand = (string.IsNullOrEmpty(command) ? Configurations.ADD_DEFAULT_UNIT_TEST : string.Format(Configurations.ADD_GENERATE_CODE, command));
+                    string addCommand = (string.IsNullOrEmpty(command) ? Configurations.ADD_DEFAULT_DOCS : string.Format(Configurations.ADD_GENERATE_CODE, command));
                     string addCode = (string.IsNullOrEmpty(referenceCode) ? string.Empty : string.Format(Configurations.ADD_REFERENCE_CODE, referenceCode.ReplaceNewLineChars()));
                     PromptCommand = $" {CLIPhase.DOCS} \"{addLang} {addCommand} {addCode} \"";
                     _logger.LogInformation($"CLI command with lang added {PromptCommand}");
@@ -313,7 +313,7 @@ namespace PromptEngineering.Services
                 else if (!language.Equals("General", StringComparison.OrdinalIgnoreCase) && phase.Equals(CLIPhase.XMLDOCS, StringComparison.OrdinalIgnoreCase))
                 {
                     string addLang = (command.Contains(language, StringComparison.OrdinalIgnoreCase) ? string.Empty : string.Format(Configurations.ADD_PROG_LANG, language));
-                    string addCommand = (string.IsNullOrEmpty(command) ? Configurations.ADD_DEFAULT_UNIT_TEST : string.Format(Configurations.ADD_GENERATE_CODE, command));
+                    string addCommand = (string.IsNullOrEmpty(command) ? Configurations.ADD_DEFAULT_XMLDOCS : string.Format(Configurations.ADD_GENERATE_CODE, command));
                     string addCode = (string.IsNullOrEmpty(referenceCode) ? string.Empty : string.Format(Configurations.ADD_REFERENCE_CODE, referenceCode.ReplaceNewLineChars()));
                     PromptCommand = $" {CLIPhase.XMLDOCS} \"{addLang} {addCommand} {addCode} \"";
                     _logger.LogInformation($"CLI command with lang added {PromptCommand}");
@@ -404,40 +404,6 @@ namespace PromptEngineering.Services
                     message.InputTokens = response.Value.Usage.InputTokenCount;
                     message.OutputTokens = response.Value.Usage.OutputTokenCount;
                     message.TotalTokens = message.InputTokens + message.OutputTokens;
-
-                    //var redactedMessage = GetRedactedMessage(command);
-
-                    //if (message.PII && redactedMessage.Item1)
-                    //{
-                    //    message.Result = redactedMessage.Item2;
-                    //    message.RespondedTime = DateTime.Now;
-                    //    message.Status = "Completed";
-
-                    //    message.Success = false;
-                    //    message.AI = true;
-                    //    message.Attempt = 1;
-                    //    message.InputTokens = 0;
-                    //    message.OutputTokens = 0;
-                    //    message.TotalTokens = 0;
-
-                    //    return;
-                    //}
-                    //else
-                    //{
-                    //    var response = client.CompleteChat(messages, requestOptions);
-
-                    //    message.Result = response.Value.Content[0].Text;
-                    //    message.RespondedTime = DateTime.Now;
-                    //    message.Status = "Completed";
-
-                    //    message.Success = true;
-                    //    message.AI = true;
-                    //    message.Attempt = 1;
-                    //    message.InputTokens = response.Value.Usage.InputTokenCount;
-                    //    message.OutputTokens = response.Value.Usage.OutputTokenCount;
-                    //    message.TotalTokens = message.InputTokens + message.OutputTokens;
-                    //}
-
                 }
 
             }
@@ -457,7 +423,6 @@ namespace PromptEngineering.Services
 
 
         }
-
         private (bool,string) GetRedactedMessage(string message)
         {
             
@@ -551,10 +516,10 @@ namespace PromptEngineering.Services
                 throw new ArgumentException("For phase 'convert', phase Optional after '/' is required.");
             }
 
-            if ((language.Equals("other", StringComparison.OrdinalIgnoreCase) ||
+            if ((language.Equals("general", StringComparison.OrdinalIgnoreCase) ||
             phase.Equals("other", StringComparison.OrdinalIgnoreCase)) && string.IsNullOrWhiteSpace(phaseOptional))
             {
-                throw new ArgumentException("Prompt is required when language or phase is other");
+                //throw new ArgumentException("Prompt is required when language or phase is other");
             }
 
             return new PromptInfo
@@ -608,6 +573,7 @@ namespace PromptEngineering.Services
         {
             return await _chatRepository.GetAllChatMessagesByGroupIDAsync(groupId);
         }
+
 
     }
 }

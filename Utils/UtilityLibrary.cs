@@ -24,21 +24,22 @@ namespace PromptEngineering.Utils
         /// <returns>A string with escape characters replaced by custom placeholders.</returns>  
         public static string ReplaceEscapeChars(this string str)
         {            
-            return str.Replace("\n", "###linebreake###").Replace("\t", "###wordbreake###").Replace($"\"", "###doublequote###");           
+            return (string.IsNullOrEmpty(str)?"":str).Replace("\n", "###linebreake###").Replace("\t", "###wordbreake###").Replace($"\"", "###doublequote###");           
         }
 
         public static string ReplaceNewLineChars(this string str)
         {
-            return str?.Replace("\r\n", "\n").Replace("\r", "\n");
+            return (string.IsNullOrEmpty(str) ? "" : str).Replace("\r\n", "\n").Replace("\r", "\n");
         }
 
         public static string ReplaceNewLineToSpaceChars(this string str)
         {
-            return str?.Replace("\r\n", " ").Replace("\n", " ").Replace("\r", " ");
+            return (string.IsNullOrEmpty(str) ? "" : str).Replace("\r\n", " ").Replace("\n", " ").Replace("\r", " ");
         }
 
         public static string CleanCliOutput(this string str)
         {
+            str = (string.IsNullOrEmpty(str) ? "" : str);
             string prefixResultContent = (str.IndexOf(Configurations.COPILOT_CLI_RESPONSE_SANITIZE1) > 0 ? str.Substring(0, str.IndexOf(Configurations.COPILOT_CLI_RESPONSE_SANITIZE1) + 43) : string.Empty);
             string postfixResultContent = (str.LastIndexOf(Configurations.COPILOT_CLI_RESPONSE_SANITIZE2) > 0 ? str.Substring(str.LastIndexOf(Configurations.COPILOT_CLI_RESPONSE_SANITIZE2)) : string.Empty);
             str = (string.IsNullOrEmpty(prefixResultContent) ? str : str.Replace(prefixResultContent, string.Empty));

@@ -56,8 +56,8 @@ namespace PromptEngineering.Services
                 var messages = buildConversations(conversationId);
 
                 messages.Add(new Microsoft.Extensions.AI.ChatMessage(ChatRole.User, command));
-                
-                return await client.GetResponseAsync(messages);   
+                var ollama = client.GetRequiredService<Microsoft.Extensions.AI.IChatClient>();
+                return await ollama.GetResponseAsync(messages);   
 
             }
             catch (Exception ex)

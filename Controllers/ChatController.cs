@@ -24,7 +24,7 @@ namespace PromptEngineering.Controllers
             _logger = logger;
             _chatServices = chatServices;
         }
-                
+
         [HttpPost]
         [Route("message")]
         [Produces("application/json")]
@@ -100,7 +100,6 @@ namespace PromptEngineering.Controllers
 
             return Ok();
         }
-
         [HttpPost]
         [Route("ai-assistant")]
         [Produces("application/json")]
@@ -147,6 +146,7 @@ namespace PromptEngineering.Controllers
             }
             return Ok(chatMessages);
         }
+
 
 
     }

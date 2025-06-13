@@ -56,7 +56,9 @@ namespace PromptEngineering.Services
 
         public async Task<List<string>> GetAllRepos()
         {
-            return await _repoRepository.GetAllRepos();
+            List<string> results = await _repoRepository.GetAllRepos();
+            results.Insert(0, "Public");
+            return results;
         }
 
         public async Task<IEnumerable<RepoSummary>> GetRepoSummary()
