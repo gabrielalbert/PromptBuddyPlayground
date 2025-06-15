@@ -96,7 +96,8 @@ namespace PromptEngineering.Utils.CodeSplitter.CSharpCodeSplitter
 
         private Dictionary<CSChunkType, List<CodeSplitterData>> GetChunkTypeSplitterData(List<CodeSplitterData> codeSplitterData) {
             var valueDict = new Dictionary<CSChunkType, List<CodeSplitterData>>();
-            var arrray = (CSChunkType[])Enum.GetValuesAsUnderlyingType(typeof(CSChunkType));
+            var arrray = (CSChunkType[])Enum.GetValues(typeof(CSChunkType));
+            //var arrray = (CSChunkType[])Enum.GetValuesAsUnderlyingType(typeof(CSChunkType));
             foreach(var val in arrray) {
                 valueDict[val] = new List<CodeSplitterData>();
             }

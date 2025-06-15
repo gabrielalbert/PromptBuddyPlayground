@@ -1,12 +1,21 @@
+using System;
+using System.IO;
+using System.Reflection;
+//using Hangfire;
+//using Hangfire.PostgreSql;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+//using PromptEngineering.Data;
+using PromptEngineering.Hubs;
 using PromptEngineering.Models;
 using PromptEngineering.Repository;
 using PromptEngineering.Services;
+using PromptEngineering.Services.CodeConversion;
 
 namespace PromptEngineering
 {
@@ -53,9 +62,24 @@ namespace PromptEngineering
             services.AddScoped<IOllamaServices, OllamaServices>();            
             services.AddScoped<ILayoutRepository, LayoutRepository>();
             services.AddScoped<ILayoutServices, LayoutServices>();
-            services.AddScoped<IGuardrailsRepository, GuardrailsRepository>();
-            services.AddScoped<IGuardrailsServices, GuardrailsServices>();
 
+            services.AddSignalR((configure) =>
+            {
+            });
+            //services.AddHangfire(config => 
+            //    config.UsePostgreSqlStorage(configureStorage => {
+            //        configureStorage.UseNpgsqlConnection(Configuration.GetConnectionString("DefaultConnection"));
+            //    })
+            //);
+            //services.AddHangfireServer(options => {
+            //    options.WorkerCount = 1;
+            //});
+            services.AddSingleton<ITaskUpdateService, TaskUpdateService>();
+            services.AddTransient<ILLMService, LLMService>();
+            //services.AddScoped<IApplicationDBContext, ApplicationDBContext>();
+            services.AddScoped<IConversionLogService, ConversionLogService>();
+            services.AddScoped<IDynamicPromptService, DynamicPromptService>();
+            
 
             //services.AddScoped<IHuggingFaceServices, HuggingFaceServices>();
 
@@ -104,6 +128,7 @@ namespace PromptEngineering
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<TaskUpdateHub>("/taskUpdate");
             });
         }
     }

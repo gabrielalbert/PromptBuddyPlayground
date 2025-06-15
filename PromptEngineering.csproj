@@ -8,16 +8,41 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Background\**" />
+    <Compile Remove="Data\**" />
+    <Compile Remove="Migrations\**" />
+    <Compile Remove="Utils\CodeSplitter\**" />
+    <Compile Remove="Utils\SummmaryGenerators\**" />
+    <Content Remove="Background\**" />
+    <Content Remove="Data\**" />
+    <Content Remove="Migrations\**" />
+    <Content Remove="Utils\CodeSplitter\**" />
+    <Content Remove="Utils\SummmaryGenerators\**" />
+    <EmbeddedResource Remove="Background\**" />
+    <EmbeddedResource Remove="Data\**" />
+    <EmbeddedResource Remove="Migrations\**" />
+    <EmbeddedResource Remove="Utils\CodeSplitter\**" />
+    <EmbeddedResource Remove="Utils\SummmaryGenerators\**" />
+    <None Remove="Background\**" />
+    <None Remove="Data\**" />
+    <None Remove="Migrations\**" />
+    <None Remove="Utils\CodeSplitter\**" />
+    <None Remove="Utils\SummmaryGenerators\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
-    <PackageReference Include="Microsoft.Extensions.AI" Version="9.3.0-preview.1.25161.3" />
-    <PackageReference Include="Microsoft.Extensions.AI.Ollama" Version="9.3.0-preview.1.25161.3" />
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="9.0.2" />
+    <PackageReference Include="Microsoft.Extensions.AI.Ollama" Version="9.5.0-preview.1.25265.7" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
-    <PackageReference Include="Npgsql" Version="8.0.4" />
-    <PackageReference Include="OllamaSharp" Version="5.1.5" />
+    <PackageReference Include="Npgsql" Version="8.0.7" />
+    <PackageReference Include="OllamaSharp" Version="5.1.7" />
     <PackageReference Include="OpenAI" Version="2.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
-    <PackageReference Include="System.Drawing.Common" Version="9.0.3" />
-    <PackageReference Include="System.Net.Http.Json" Version="9.0.3" />
+
+    <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1" />
+    <PackageReference Include="Hangfire" Version="1.8.18" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.2.0" />
   </ItemGroup>
 
   <ItemGroup>
