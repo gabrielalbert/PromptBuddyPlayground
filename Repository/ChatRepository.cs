@@ -481,9 +481,14 @@ public async Task<IEnumerable<ChatMessage>> GetAllChatMessagesByGroupIDAsync(int
             var chatMessages = new List<ChatMessage>();
             try
             {
-                var sql = @"select llm,ai_model,prog_lang, phase,phase_optional,prompt,reference,result,status,attempt,success,requested_time,responded_time,user_name,prompt_engg_type,chat_id,feedback,group_id from  chats where  group_id=@group_id";
+                var sql = @"select c.llm,c.ai_model,c.prog_lang, c.phase,c.phase_optional,c.prompt,c.reference,c.result,c.status,c.attempt,c.success
+,c.requested_time,c.responded_time,c.user_name,c.prompt_engg_type,c.chat_id,c.feedback,c.group_id
+,case when c.conversation_id=0 then null else (select ch.chat_id from chats ch where ch.chat_id=c.conversation_id and ch.group_id=c.group_id) end as reply_id
+,case when c.conversation_id=0 then '' else (select CONCAT( '#',coalesce(ch.prog_lang, ''),' @',coalesce(ch.phase, ''),' ',coalesce(ch.prompt, '')) from chats ch where ch.chat_id=c.conversation_id and ch.group_id=c.group_id) end as reply_message
+,case when c.conversation_id=0 then null else (select ch.requested_time from chats ch where ch.chat_id=c.conversation_id and ch.group_id=c.group_id) end as reply_date
+from  chats as c where  c.group_id=@group_id";
                                
-                sql += " order by chat_id asc;";
+                sql += " order by c.chat_id asc;";
                 _logger.LogInformation($"GetAllChatMessagesByGroupID Query {sql} ");
 
                 using (var connection = new NpgsqlConnection(_connectionString))
@@ -512,6 +517,19 @@ public async Task<IEnumerable<ChatMessage>> GetAllChatMessagesByGroupIDAsync(int
                                 aiSendMessage.ChatId = reader.GetInt32(15);
                                 aiSendMessage.Feedback = (string.IsNullOrEmpty(feedback) ? "" : feedback);
                                 aiSendMessage.GroupId = reader.GetInt32(17);
+                                if (!reader.IsDBNull(18))
+                                {
+                                    aiSendMessage.Reply = new ReplyMessage
+                                    {
+                                        ReplyId = reader.GetInt32(18),
+                                        ReplyText = reader.GetString(19),
+                                        ReplyDate = reader.GetDateTime(20).ToString("yyyy-MM-dd HH:mm:ss")
+                                    };
+                                }
+                                else
+                                {
+                                    aiSendMessage.Reply = null;
+                                }
                                 chatMessages.Add(aiSendMessage);
                                 _logger.LogInformation($"Sender: {aiSendMessage.MessageSender} Output: {aiSendMessage.MessageText}");
                                 var aiReplyMessage = new ChatMessage();

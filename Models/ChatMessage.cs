@@ -13,5 +13,14 @@ namespace PromptEngineering.Models
         public string Feedback {get;set;}
         public string RawMessageText { get; set; }
         public int GroupId { get; set; }
+        public ReplyMessage Reply { get; set; }
+    }
+
+    public class ReplyMessage
+    {
+        public int ReplyId { get; set; }
+        public string ReplyText { get; set; }
+        public string ReplyDate { get; set; }
+
     }
 }
