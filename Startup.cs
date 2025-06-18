@@ -15,7 +15,7 @@ using PromptEngineering.Hubs;
 using PromptEngineering.Models;
 using PromptEngineering.Repository;
 using PromptEngineering.Services;
-using PromptEngineering.Services.CodeConversion;
+
 
 namespace PromptEngineering
 {
@@ -74,11 +74,9 @@ namespace PromptEngineering
             //services.AddHangfireServer(options => {
             //    options.WorkerCount = 1;
             //});
-            services.AddSingleton<ITaskUpdateService, TaskUpdateService>();
-            services.AddTransient<ILLMService, LLMService>();
+            
+            
             //services.AddScoped<IApplicationDBContext, ApplicationDBContext>();
-            services.AddScoped<IConversionLogService, ConversionLogService>();
-            services.AddScoped<IDynamicPromptService, DynamicPromptService>();
             
 
             //services.AddScoped<IHuggingFaceServices, HuggingFaceServices>();

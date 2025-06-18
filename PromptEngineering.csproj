@@ -7,28 +7,6 @@
     <DockerfileContext>.</DockerfileContext>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Background\**" />
-    <Compile Remove="Data\**" />
-    <Compile Remove="Migrations\**" />
-    <Compile Remove="Utils\CodeSplitter\**" />
-    <Compile Remove="Utils\SummmaryGenerators\**" />
-    <Content Remove="Background\**" />
-    <Content Remove="Data\**" />
-    <Content Remove="Migrations\**" />
-    <Content Remove="Utils\CodeSplitter\**" />
-    <Content Remove="Utils\SummmaryGenerators\**" />
-    <EmbeddedResource Remove="Background\**" />
-    <EmbeddedResource Remove="Data\**" />
-    <EmbeddedResource Remove="Migrations\**" />
-    <EmbeddedResource Remove="Utils\CodeSplitter\**" />
-    <EmbeddedResource Remove="Utils\SummmaryGenerators\**" />
-    <None Remove="Background\**" />
-    <None Remove="Data\**" />
-    <None Remove="Migrations\**" />
-    <None Remove="Utils\CodeSplitter\**" />
-    <None Remove="Utils\SummmaryGenerators\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
