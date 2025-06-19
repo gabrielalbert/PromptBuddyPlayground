@@ -70,8 +70,11 @@ namespace PromptEngineering.Repository
                             {
                                 string feedback = (reader.IsDBNull(16) ? "" : reader.GetString(16));
                                 var aiSendMessage = new ChatMessage();
-                                string phaseOptional = (reader.GetString(3).ToLower() == "convert" ? (string.IsNullOrEmpty(reader.GetString(4)) ? "" : "/" + reader.GetString(4)) : "");
-                                string sendMessage = @$"#{reader.GetString(2)} @{reader.GetString(3)} {phaseOptional} {reader.GetString(5)} {reader.GetString(6)}";
+                                string lang = string.IsNullOrWhiteSpace(reader.IsDBNull(2) ? "" : reader.GetString(2)) ? string.Empty : "#" + reader.GetString(2);
+                                string phase = string.IsNullOrWhiteSpace(reader.IsDBNull(3) ? "" : reader.GetString(3)) ? string.Empty : "@" + reader.GetString(3);
+                                string phaseOptional = (phase == "convert" ? (string.IsNullOrEmpty(reader.GetString(4)) ? "" : "/" + reader.GetString(4)) : "");
+                                string sendMessage = (string.IsNullOrEmpty(lang) ? string.Empty : (lang + " ")) + (string.IsNullOrEmpty(phase) ? string.Empty : (phase + " ")) + (string.IsNullOrEmpty(phaseOptional) ? string.Empty : (phaseOptional + " "))+reader.GetString(5)+" " +reader.GetString(6);
+
                                 aiSendMessage.RawMessageText = sendMessage;
                                 aiSendMessage.MessageText = sendMessage.ReplaceEscapeChars();
                                 aiSendMessage.MessageSender = MessageSender.User;
@@ -505,9 +508,11 @@ from  chats as c where  c.group_id=@group_id";
                             while (await reader.ReadAsync())
                             {
                                 string feedback = (reader.IsDBNull(16) ? "" : reader.GetString(16));
-                                var aiSendMessage = new ChatMessage();
-                                string phaseOptional = (reader.GetString(3).ToLower() == "convert" ? (string.IsNullOrEmpty(reader.GetString(4)) ? "" : "/" + reader.GetString(4)) : "");
-                                string sendMessage = @$"#{reader.GetString(2)} @{reader.GetString(3)} {phaseOptional} {reader.GetString(5)} {reader.GetString(6)}";
+                                var aiSendMessage = new ChatMessage();                                
+                                string lang = string.IsNullOrWhiteSpace(reader.IsDBNull(2) ? "" : reader.GetString(2)) ? string.Empty : "#"+ reader.GetString(2);
+                                string phase = string.IsNullOrWhiteSpace(reader.IsDBNull(3) ? "" : reader.GetString(3)) ? string.Empty : "@" + reader.GetString(3);                                
+                                string phaseOptional = (phase == "convert" ? (string.IsNullOrEmpty(reader.GetString(4)) ? "" : "/" + reader.GetString(4)) : "");
+                                string sendMessage = (string.IsNullOrEmpty(lang) ? string.Empty : (lang + " ")) + (string.IsNullOrEmpty(phase) ? string.Empty : (phase + " ")) + (string.IsNullOrEmpty(phaseOptional) ? string.Empty : (phaseOptional + " ")) + reader.GetString(5) + " " + reader.GetString(6);
                                 aiSendMessage.RawMessageText = sendMessage;
                                 aiSendMessage.MessageText = sendMessage.ReplaceEscapeChars();
                                 aiSendMessage.MessageSender = MessageSender.User;
